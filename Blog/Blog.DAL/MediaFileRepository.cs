@@ -1,0 +1,65 @@
+﻿using Blog.Entities;
+using System;
+using System.Collections.Generic;
+using System.Data.Objects;
+using System.Linq;
+
+namespace Blog.DAL
+{
+    public class MediaFileRepository:IMediaFileRepository
+    {
+        private readonly string _connectionString;
+
+        public MediaFileRepository() { }
+
+        public MediaFileRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public List<MediaFile> GetAllMediaFiles()
+        {
+            using (ObjectContext context = new ObjectContext(_connectionString))
+            {
+                ObjectSet<MediaFile> mediaFilesObjectSet = context.CreateObjectSet<MediaFile>();
+
+                return mediaFilesObjectSet.ToList();
+            }
+        }
+        
+        public MediaFile GetMediaFileById(int id)
+        {
+            using (ObjectContext context = new ObjectContext(_connectionString))
+            {
+                ObjectSet<MediaFile> mediaFilesObjectSet = context.CreateObjectSet<MediaFile>();
+
+                return mediaFilesObjectSet.FirstOrDefault(mf => mf.MediaFileID == id);
+            }
+        }
+
+        public void UpdateMediaFile(MediaFile mediaFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddMediaFile(MediaFile mediaFile)
+        {
+            using (ObjectContext context = new ObjectContext(_connectionString))
+            {
+                ObjectSet<MediaFile> mediaFilesObjectSet = context.CreateObjectSet<MediaFile>();
+                mediaFilesObjectSet.AddObject(mediaFile);
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteMediaFile(int mediaFileId)
+        {
+            using (ObjectContext context = new ObjectContext(_connectionString))
+            {
+                ObjectSet<MediaFile> mediaFilesObjectSet = context.CreateObjectSet<MediaFile>();
+                mediaFilesObjectSet.DeleteObject(mediaFilesObjectSet.Single(mf => mf.MediaFileID == mediaFileId));
+                context.SaveChanges();
+            }
+        }
+    }
+}
