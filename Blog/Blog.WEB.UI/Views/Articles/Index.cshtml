@@ -1,8 +1,53 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Articles";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    @*string email = ViewBag.email;*@
+}
+
+@section Style{
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Pages/article.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Pages/articles.css")"/>
 }
 
 @section Body{
-    Successfully authenticated
+    @*@Html.Action("ShowNavbar","Home")*@
+    <section class="content">
+        <div class="row">
+            <section class="col-md-9">
+                @Html.Action("ShowArticles")
+                <nav class="pager-block">
+                    <ul class="pager">
+                        <li class="disabled"><a href="#">Previous</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </section>
+            <aside class="col-md-3">
+                <div class="search-post">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+                <div class="popular-posts">
+                    <span>Popular posts
+                    </span>
+                    <!--<hr />-->
+                    <div class="popular-posts-item">
+                        <img src="@Url.Content("~/Images/img.png")" />
+                        <div class="popular-post-title">Welcome to Addiction !</div>
+                    </div>
+                    <div class="popular-posts-item">
+                        <img src="@Url.Content("~/Images/img.png")" />
+                        <div class="popular-post-title">Welcome to Addiction !</div>
+                    </div>
+                </div>
+                @Html.Action("ShowCategories")
+                
+            </aside>
+        </div>
+    </section>
+}
+
+@section Scripts{
+    <script src="~/Scripts/Pages/index.js"></script>
 }

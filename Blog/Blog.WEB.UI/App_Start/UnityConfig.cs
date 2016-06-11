@@ -1,7 +1,7 @@
 using System.Configuration;
 using System.Web.Mvc;
 using Blog.DAL;
-using Blog.WEBUI.Frontend.Code.Security;
+using Blog.WEB.UI.Code.Security;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 

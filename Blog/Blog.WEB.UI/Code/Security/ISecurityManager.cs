@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Principal;
 
-namespace Blog.WEBUI.Frontend.Code.Security
+namespace Blog.WEB.UI.Code.Security
 {
     public interface ISecurityManager
     {

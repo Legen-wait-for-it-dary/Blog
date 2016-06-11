@@ -7,28 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blog.Entities
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using Blog.Entities;
+
+public partial class db_blog_con_str : DbContext
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class db_blog_con_str : DbContext
+    public db_blog_con_str()
+        : base("name=db_blog_con_str")
     {
-        public db_blog_con_str()
-            : base("name=db_blog_con_str")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public DbSet<Article> Articles { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<MediaFile> MediaFiles { get; set; }
-        public DbSet<Member> Members { get; set; }
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public DbSet<Article> Articles { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Comment> Comments { get; set; }
+    public DbSet<MediaFile> MediaFiles { get; set; }
+    public DbSet<Member> Members { get; set; }
 }

@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="../css/pages/article.css" />
     <!--/styles-->
     <!--scripts-->
-    <script src="../js/pages/common.js"></script>
+    <script src="../js/common/common.js"></script>
+	<script src="../js/pages/article.js"></script>
     <!--/scripts-->
 </head>
 <body>
@@ -112,45 +113,12 @@
                                         </p>
                
                <!-- Nested media object -->
-                                                <div class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <img class="media-object" src="../img/pages/home/my-photo.jpg"
-                                                            alt="Generic placeholder image">
-                                                    </a>
-
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading"><span class="comment-user-name">Sora Templates</span><span class="comment-date">23 August 2014 at 05:41</span></h4>
-                                        <p>
-                                            This is some sample text. This is some sample text. 
-            This is some sample text. This is some sample text.
-            This is some sample text. This is some sample text. 
-            This is some sample text. This is some sample text.
-                                        </p>
-                                                    </div>
-
-                                                </div>
+                                                
                                             </div>
 
                                         </div>
 
-                                        <!-- Nested media object -->
-                                        <div class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object" src="../img/pages/home/my-photo.jpg"
-                                                    alt="Generic placeholder image">
-                                            </a>
-
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><span class="comment-user-name">Sora Templates</span><span class="comment-date">23 August 2014 at 05:41</span></h4>
-                                        <p>
-                                            This is some sample text. This is some sample text. 
-            This is some sample text. This is some sample text.
-            This is some sample text. This is some sample text. 
-            This is some sample text. This is some sample text.
-                                        </p>
-                                            </div>
-
-                                        </div>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -164,8 +132,8 @@
                                                     <div class="media-body">
                                                         <h4 class="media-heading"><span class="comment-user-name">Sora Templates</span></h4>
                                         <div class="add-comment">
-                                <textarea class="form-control" placeholder="Write your comment..."></textarea>
-                                <button type="button" class="btn btn-success">Add comment</button>
+                                <textarea class="form-control" placeholder="Write your comment..." id="add-comment-content"></textarea>
+                                <button type="button" class="btn btn-success" id="add-comment">Add comment</button>
                                 <button type="button" class="btn btn-warning">Cancel</button>
                             </div>
                                                     </div>

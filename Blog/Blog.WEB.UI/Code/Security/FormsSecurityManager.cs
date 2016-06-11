@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
@@ -9,7 +7,7 @@ using Blog.DAL;
 using Blog.Entities;
 
 
-namespace Blog.WEBUI.Frontend.Code.Security
+namespace Blog.WEB.UI.Code.Security
 {
     public class FormsSecurityManager: ISecurityManager
     {
@@ -23,7 +21,7 @@ namespace Blog.WEBUI.Frontend.Code.Security
 
         public FormsSecurityManager(IMemberRepository userRepository)
         {
-            this._memberRepository = userRepository;
+            _memberRepository = userRepository;
         }
 
         #endregion
@@ -32,14 +30,14 @@ namespace Blog.WEBUI.Frontend.Code.Security
 
         public bool Login(string userName, string password)
         {
-            Member user = this._memberRepository.GetMember(userName, password);
+            Member user = _memberRepository.GetMember(userName, password);
 
             if (user == null)
             {
                 return false;
             }
 
-            this.RefreshPrincipal();
+            RefreshPrincipal();
 
             FormsAuthentication.SetAuthCookie(userName, false);
 
@@ -57,17 +55,17 @@ namespace Blog.WEBUI.Frontend.Code.Security
             {
                 return HttpContext.Current.User != null
                     && HttpContext.Current.User.Identity != null
-                    && HttpContext.Current.User.Identity.IsAuthenticated == true;
+                    && HttpContext.Current.User.Identity.IsAuthenticated;
             }
         }
 
         public void RefreshPrincipal()
         {
             IPrincipal incomingPrincipal =  HttpContext.Current.User;
-            if (this.IsAuthenticated == true)
+            if (IsAuthenticated)
             {
-                Member member = this._memberRepository.GetMember(incomingPrincipal.Identity.Name);
-                HttpContext.Current.User = this.CreatePrincipal(member);
+                Member member = _memberRepository.GetMember(incomingPrincipal.Identity.Name);
+                HttpContext.Current.User = CreatePrincipal(member);
             }
         }
 
@@ -85,9 +83,7 @@ namespace Blog.WEBUI.Frontend.Code.Security
 
         private ClaimsPrincipal CreatePrincipal(Member member)
         {
-            string userName = member.Email;
-            List<string> roles = new List<string>();
-            roles.Add("user");
+            List<string> roles = new List<string> {"user"};
             if (member.isAdmin)
             {
                 roles.Add("admin");

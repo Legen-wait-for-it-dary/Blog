@@ -17,7 +17,10 @@ var AccountPage = function () {
             source.push($("#auto").val());
             $(this).hide();
         });
-
+		
+		
+		
+		
         $("#auto").autocomplete({
             source: function (request, response) {
                 var result = $.ui.autocomplete.filter(categories, request.term);
@@ -30,8 +33,10 @@ var AccountPage = function () {
         });
 
         $(".form-inline").on("submit", function () { return false; });
+		
+		$("#delete-entry-image").on("click", this.deleteEntryImage);
     };
-
+	
     this.showMyAccountBlock = function (event) {
         $("#" + event.data.idOfClickedElement).addClass("selected");
         var divs = $(".my-account > div");

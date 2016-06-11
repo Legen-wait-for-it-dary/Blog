@@ -154,27 +154,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\Common\common.css" />
     <Content Include="Content\Libs\bootstrap-3.3.6\bootstrap.min.css" />
-    <Content Include="Content\Libs\font-awesome-4.6.3\font-awesome.min.css" />
     <Content Include="Content\Libs\jquery-ui-1.11.4\jquery-ui.min.css" />
+    <Content Include="Content\Pages\article.css" />
+    <Content Include="Content\Pages\articles.css" />
     <Content Include="Content\Pages\index.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\img.png" />
     <Content Include="Scripts\Libs\bootstrap-3.3.6\bootstrap.min.js" />
     <Content Include="Scripts\Libs\jquery-1.12.0\jquery.min.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\jquery-ui.min.js" />
-    <Content Include="Scripts\Libs\tinymce\jquery.tinymce.min.js" />
-    <Content Include="Scripts\Libs\tinymce\license.txt" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\content.inline.min.css" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\content.min.css" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.svg" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\anchor.gif" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\loader.gif" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\object.gif" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\trans.gif" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\skin.ie7.min.css" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\skin.min.css" />
-    <Content Include="Scripts\Libs\tinymce\themes\modern\theme.min.js" />
-    <Content Include="Scripts\Libs\tinymce\tinymce.min.js" />
     <Content Include="Scripts\Pages\index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -201,13 +189,9 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Artem.pubxml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Articles\Index.cshtml" />
+    <Content Include="Views\Shared\_Categories.cshtml" />
+    <Content Include="Views\Articles\_Articles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">

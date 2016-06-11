@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/pages/sign-up.css" />
     <!--/styles-->
     <!--scripts-->
-    <script src="../js/pages/common.js"></script>
+    <script src="../js/common/common.js"></script>
     <script src="../js/pages/sign-up.js"></script>
     <!--/scripts-->
 </head>
@@ -26,50 +26,49 @@
     <div class="container-fluid">
         <section class="content">
             <div class="row">
-                <form class="sign-in">
+                <form id="sign-in">
                     <div class="form-group">
                         <label for="sign-in-email">Email</label>
-                        <input type="email" class="form-control" id="sign-in-email" placeholder="Email">
-                    </div>
+                        <input type="email" data-val="true" data-val-regex-pattern="^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" class="form-control" id="sign-in-email" placeholder="Email">
+					</div>
+					<div class="alert alert-danger" role="alert" id="sign-in-email-error"></div>
                     <div class="form-group">
                         <label for="sign-in-password">Password</label>
                         <input type="password" class="form-control" id="sign-in-password" placeholder="Password">
                     </div>
-                    <!--<div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                        <p class="help-block">Example block-level help text here.</p>
-                    </div>-->
+					<div class="alert alert-danger" role="alert" id="sign-in-email-password"></div>
                     <div class="form-group">
                         <p class="help-block"><a href="#" id="sign-up-link">or sign up</a></p>
                     </div>
-                    <!--<div class="checkbox">
+                    <div class="checkbox">
                         <label>
                             <input type="checkbox">
-                            Check me out
-   
+                            Keep me sign in
                         </label>
-                    </div>-->
-                    <button type="submit" class="btn btn-default">Sign in</button>
+                    </div>
+                    <button type="submit" class="btn btn-default" id="submit-sign-in">Sign in</button>
                 </form>
-                <form class="sign-up">
+                <form id="sign-up">
                     <div class="form-group">
                         <label for="sign-up-email">Email</label>
-                        <input type="email" class="form-control" id="sign-up-email" placeholder="Email">
+                        <input type="email" data-val="true" data-val-regex-pattern="^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" class="form-control" id="sign-up-email" placeholder="Email">
                     </div>
+					<div class="alert alert-danger" role="alert" id="sign-up-email-error">Error</div>
                     <div class="form-group">
                         <label for="sign-up-password">Password</label>
                         <input type="password" class="form-control" id="sign-up-password" placeholder="Password">
                     </div>
+					<div class="alert alert-danger" role="alert" id="sign-up-password">Error</div>
                     <div class="form-group">
                         <label for="sign-up-rep-password">Repeat password</label>
                         <input type="password" class="form-control" id="sign-up-rep-password" placeholder="Password">
                     </div>
-                    <!--<div class="form-group">
-                        <label for="exampleInputFile">File input</label>
+					<div class="alert alert-danger" role="alert" id="sign-up-rep-email-error">Error</div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">User photo</label>
                         <input type="file" id="File1">
-                    </div>-->
-                    <button type="submit" class="btn btn-default">Sign up</button>
+                    </div>
+                    <button type="submit" class="btn btn-default" id="submit-sign-up">Sign up</button>
                 </form>
             </div>
         </section>

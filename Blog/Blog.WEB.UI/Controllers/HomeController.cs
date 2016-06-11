@@ -1,17 +1,17 @@
 ﻿using System.Web.Mvc;
-using Blog.DAL;
-using Blog.WEBUI.Frontend.Code.Security;
+//using Blog.DAL;
+using Blog.WEB.UI.Code.Security;
 
 namespace Blog.WEB.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMemberRepository _memberRepository;
+        //private readonly IMemberRepository _memberRepository;
         private readonly ISecurityManager _securityManager;
 
-        public HomeController(IMemberRepository memberRepository, ISecurityManager securityManager)
+        public HomeController(/*IMemberRepository memberRepository, */ISecurityManager securityManager)
         {
-            _memberRepository = memberRepository;
+            //_memberRepository = memberRepository;
             _securityManager = securityManager;
         }
         

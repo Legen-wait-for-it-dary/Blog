@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Blog.WEB.UI.Models.Article>
+
+@foreach (Blog.WEB.UI.Models.Article item in Model)
+{
+    <article class="artilce">
+        <div class="latest-project">
+            <div class="article-title">
+                @item.Title
+            </div>
+            <div class="article-meta-data">
+                <div class="article-post-date">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>@if (item.PostedDate != null)
+                                                                    {
+                                                                        @item.PostedDate.Value.ToLongDateString()
+                                                                    }
+                </div>
+                <div class="article-tag">
+                    <i class="fa fa-tags"></i>@item.Category
+                </div>
+                <div class="article-number-comments">
+                    <i class="fa fa-comments"></i>19 Comments
+                </div>
+            </div>
+            <div class="article-img">
+                @{
+    if (@item.BigImagePath != "")
+    {
+        <img src="@Url.Content("~/Images/"+@item.BigImagePath)"/>            
+    }
+                }
+
+            </div>
+            <div class="article-content">
+                @Html.Raw(@item.Content)
+            </div>
+        </div>
+       @* @Html.ActionLink("Read more","Article","Article",new {id = @item.ArticleID},new { @class="read-more-btn"})*@
+        @Html.ActionLink("Read more","Index","Home",new {id = @item.ArticleId},new { @class="read-more-btn"})
+    </article>
+}
