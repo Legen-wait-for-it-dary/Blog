@@ -135,17 +135,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Code\Security\FormsSecurityManager.cs" />
+    <Compile Include="Code\Security\ISecurityManager.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Member.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\Common\common.css" />
+    <Content Include="Content\Libs\bootstrap-3.3.6\bootstrap.min.css" />
+    <Content Include="Content\Libs\font-awesome-4.6.3\font-awesome.min.css" />
+    <Content Include="Content\Libs\jquery-ui-1.11.4\jquery-ui.min.css" />
+    <Content Include="Content\Pages\index.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Libs\bootstrap-3.3.6\bootstrap.min.js" />
+    <Content Include="Scripts\Libs\jquery-1.12.0\jquery.min.js" />
+    <Content Include="Scripts\Libs\jquery-ui-1.11.4\jquery-ui.min.js" />
+    <Content Include="Scripts\Libs\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Scripts\Libs\tinymce\license.txt" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\Libs\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\Libs\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\Pages\index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -157,7 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Scripts\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -167,6 +197,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\Artem.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\Articles\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">
+      <Project>{dad15687-3cd6-4647-9a76-60cf7f23ab1b}</Project>
+      <Name>Blog.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Entities\Blog.Entities.csproj">
+      <Project>{c0c47c70-fd6a-4ed6-bdfa-ea11006c0570}</Project>
+      <Name>Blog.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

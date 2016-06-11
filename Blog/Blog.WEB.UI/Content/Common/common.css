@@ -1,0 +1,83 @@
+﻿html, body {
+    height: 100%;
+}
+
+html { font-size: 62.5%; } 
+
+body {
+    background-color: #DAE3E7;
+    padding-top: 120px;
+    font-size: 1.4rem;
+}
+
+button {
+    outline: none;
+    border: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.content {
+    padding: 0 5%;
+}
+
+.navbar {
+    border-radius:0;
+    background-color:white;
+    font-weight:bold;
+}
+
+.navbar-toggle {
+    margin-top:40px;
+    border:1px solid #DDDDDD; 
+}
+
+.navbar-toggle span{
+    background-color:#DDDDDD;
+}
+
+
+/*.navbar-brand{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: 100px;
+    line-height:100px;
+    color:#636363;
+    margin-left:20px !important;
+}
+
+.navbar-nav > li > a {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: 100px;
+    line-height:100px;
+    color:#636363;
+    font-size:0.9em;
+}
+
+.small-nav > li > a{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: 50px !important;
+    line-height:50px !important;
+}
+
+.small-nav{
+    padding-top: -10px !important;
+    padding-bottom: -10px !important;
+    height: 50px !important;
+    line-height:50px !important;
+}
+
+.navbar-nav > li:last-child {
+    padding-right:10px;
+}*/
+
+
+

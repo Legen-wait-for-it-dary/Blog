@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Blog.DAL;
+using Blog.WEBUI.Frontend.Code.Security;
 
 namespace Blog.WEB.UI
 {
@@ -19,6 +22,16 @@ namespace Blog.WEB.UI
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            UnityConfig.RegisterComponents();
+        }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["db_blog_con_str"].ConnectionString;
+            IMemberRepository userRepository = new MemberRepository(connectionString);
+            ISecurityManager securityManager = new FormsSecurityManager(userRepository);
+
+            securityManager.RefreshPrincipal();
         }
     }
 }
