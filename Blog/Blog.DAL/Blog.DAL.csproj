@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleRepository.cs" />
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="CommentRepository.cs" />
+    <Compile Include="IArticleRepository.cs" />
+    <Compile Include="ICategoryRepository.cs" />
+    <Compile Include="ICommentRepository.cs" />
+    <Compile Include="IMediaFileRepository.cs" />
+    <Compile Include="IMemberRepository.cs" />
+    <Compile Include="MediaFileRepository.cs" />
+    <Compile Include="MemberRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Entities\Blog.Entities.csproj">
+      <Project>{c0c47c70-fd6a-4ed6-bdfa-ea11006c0570}</Project>
+      <Name>Blog.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
