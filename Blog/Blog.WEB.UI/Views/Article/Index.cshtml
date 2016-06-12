@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Blog.WEB.UI.Models.Article article = ViewBag.article;
+    int numOfComments = ViewBag.numOfComments;
+    string memberEmail = ViewBag.memberEmail;
+    string memberAvatar = ViewBag.memberAvatar;
+}
+
+@section Style{
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/Pages/article.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Content/Pages/articles.css")"/>
+}
+
+@section Body{
+    
+   @* @Html.Action("ShowNavbar","Home")*@
+    <section class="content">
+        <div class="row">
+            <section class="col-md-9">
+                <article class="article" art-id="@article.ArticleId">
+                    <div class="article-title">
+                        @article.Title
+                    </div>
+                    <div class="article-meta-data">
+                        <div class="article-post-date">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>@if (article.PostedDate != null)
+                                                                            {
+                                                                                @article.PostedDate.Value.ToLongDateString()
+                                                                            }
+                        </div>
+                        <div class="article-tag">
+                            <i class="fa fa-tags"></i>@article.Category
+                        </div>
+                        <div class="article-number-comments">
+                            <i class="fa fa-comments"></i>@numOfComments Comments
+                        </div>
+                    </div>
+                    <div class="article-img">
+                        <img src="@Url.Content("~/Images/"+@article.BigImagePath)"/>
+                    </div>
+                    <div class="article-content">
+                        @Html.Raw(article.Content)
+                    </div>
+                    <div class="article-comments">
+                        <div class="article-num-comments">
+                            <div class="flag">
+                                <span>@numOfComments Comments </span>
+                            </div>
+                        </div>
+                        @Html.Action("ShowComments", "Article", new { articleID = @article.ArticleId })
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="@Url.Content("~/Images/"+@memberAvatar)">
+                            </a>
+
+                            <div class="media-body">
+                                <h4 class="media-heading"><span class="comment-user-name">@memberEmail</span></h4>
+                                <div class="add-comment">
+                                    <textarea class="form-control" id="add-comment-content" placeholder="Write your comment..."></textarea>
+                                    <button type="button" class="btn btn-success" id="add-comment">Add comment</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <aside class="col-md-3">
+                <div class="search-post">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+               <div class="popular-posts">
+                    <span>Popular posts
+                    </span>
+                    <!--<hr />-->
+                    <div class="popular-posts-item">
+                        <img src="@Url.Content("~/Images/img.png")" />
+                        <div class="popular-post-title">Welcome to Addiction !</div>
+                    </div>
+                    <div class="popular-posts-item">
+                        <img src="@Url.Content("~/Images/img.png")" />
+                        <div class="popular-post-title">Welcome to Addiction !</div>
+                    </div>
+                </div>
+                @Html.Action("ShowCategories")
+            </aside>
+        </div>
+    </section>
+}
+
+@section Scripts{
+    <script src="~/Scripts/Pages/article.js"></script>
+}

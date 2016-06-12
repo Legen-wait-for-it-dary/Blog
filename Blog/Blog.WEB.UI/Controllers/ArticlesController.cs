@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using Blog.DAL;
+using Blog.WEB.UI.Code;
+using Blog.WEB.UI.Code.ModelsConverter;
 using Blog.WEB.UI.Code.Security;
 
 namespace Blog.WEB.UI.Controllers
@@ -50,62 +49,17 @@ namespace Blog.WEB.UI.Controllers
             return PartialView("_Articles", GetAllArticles());
         }
 
-        public string GetMediaFilePath(int mediaFileId)
-        {
-            using (var ms = new MemoryStream(_mediaFileRepository.GetMediaFileById(mediaFileId).Data))
-            {
-                using (var img = Image.FromStream(ms))
-                {
-                    string extension = "";
-                    if (img.RawFormat.Equals(ImageFormat.Bmp)) extension = "bmp";
-                    if (img.RawFormat.Equals(ImageFormat.Gif)) extension = "gif";
-                    if (img.RawFormat.Equals(ImageFormat.Icon)) extension = "vnd.microsoft.icon";
-                    if (img.RawFormat.Equals(ImageFormat.Jpeg)) extension = "jpeg";
-                    if (img.RawFormat.Equals(ImageFormat.Png)) extension = "png";
-                    if (img.RawFormat.Equals(ImageFormat.Tiff)) extension = "tiff";
-                    if (img.RawFormat.Equals(ImageFormat.Wmf)) extension = "wmf";
-
-                    string fileName = mediaFileId + "." + extension;
-                    string path = Server.MapPath("/Images/" + fileName);
-
-                    using (var fs = new BinaryWriter(new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write)))
-                    {
-                        fs.Write(_mediaFileRepository.GetMediaFileById(mediaFileId).Data);
-                        fs.Close();
-                    }
-                    return fileName;
-                }
-            }
-        }
 
         [ChildActionOnly]
         public List<Models.Category> GetAllCategories()
         {
-            List<Models.Category> categories = (from category in _categoryRepository.GetAllCategories()
-                                                select new Models.Category()
-                                                {
-                                                    CategoryId = category.CategoryID,
-                                                    Name = category.Name
-                                                }).ToList();
-            return categories;
+            return Convert.ConvertCategoryEntity(_categoryRepository);
         }
 
         [ChildActionOnly]
         public List<Models.Article> GetAllArticles()
         {
-            List<Models.Article> articles = (from article in _articleRepository.GetAllArticles()
-                                             select new Models.Article()
-                                                                                              {
-                                                                                                  ArticleId = article.ArticleID,
-                                                                                                  Title = article.Title,
-                                                                                                  BigImagePath = (article.BigImage == null) ? "" : GetMediaFilePath((int)article.BigImage),
-                                                                                                  Category = _categoryRepository.GetCategoryById(article.CategoryID).Name,
-                                                                                                  Content = article.Content,
-                                                                                                  PostedDate = article.PostedDate,
-                                                                                                  CreateDate = article.CreateDate,
-                                                                                              }).ToList();
-
-            return articles;
+            return Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository);
         }
 
     }

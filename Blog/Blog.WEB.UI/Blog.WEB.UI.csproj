@@ -135,8 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Code\ImageSaver.cs" />
+    <Compile Include="Code\ModelsConverter\Convert.cs" />
     <Compile Include="Code\Security\FormsSecurityManager.cs" />
     <Compile Include="Code\Security\ISecurityManager.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,6 +166,7 @@
     <Content Include="Scripts\Libs\bootstrap-3.3.6\bootstrap.min.js" />
     <Content Include="Scripts\Libs\jquery-1.12.0\jquery.min.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\jquery-ui.min.js" />
+    <Content Include="Scripts\Pages\article.js" />
     <Content Include="Scripts\Pages\index.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -192,6 +196,8 @@
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Shared\_Categories.cshtml" />
     <Content Include="Views\Articles\_Articles.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\_Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">

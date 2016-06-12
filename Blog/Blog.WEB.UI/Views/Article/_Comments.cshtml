@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Blog.WEB.UI.Models.Comment>
+
+<ul class="media-list">
+    @{ 
+        foreach (var item in Model)
+        {
+        <li class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="@Url.Content("~/Images/"+@item.MemberAvatar)"/>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><span class="comment-user-name">@item.MemberEmail</span><span class="comment-date">@item.PublishDate.ToLongDateString()</span></h4>
+                <p>
+                    @item.Content
+                </p>
+            </div>
+        </li>        
+        }   
+    }
+</ul>
