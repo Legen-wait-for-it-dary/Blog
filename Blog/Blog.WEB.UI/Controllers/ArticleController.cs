@@ -41,8 +41,8 @@ namespace Blog.WEB.UI.Controllers
                 {
                     ViewBag.article = GetAllArticles().First(art => art.ArticleId == id);
                     Member member = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name);
-                    ViewBag.memberAvatar = ImageSaver.SaveImage(member.Avatar,_mediaFileRepository.GetMediaFileById(member.Avatar).Data);
-                    ViewBag.numOfComments = _commentRepository.GetAllComments().Where(com => com.ArticleID == id).ToList().Count;
+                    ViewBag.memberAvatar = _mediaFileRepository.GetMediaFileById(member.UserPhoto).FileName;
+                    ViewBag.numOfComments = _commentRepository.GetAllComments().Where(com => com.ArticleId == id).ToList().Count;
                     return View();
                 }
                 catch (Exception exc)
@@ -60,8 +60,8 @@ namespace Blog.WEB.UI.Controllers
             {
                 Content = content,
                 PublishDate = DateTime.Now,
-                MemberID = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberID,
-                ArticleID = int.Parse(articleId)
+                MemberId = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId,
+                ArticleId = int.Parse(articleId)
             });
 
             return Json(new

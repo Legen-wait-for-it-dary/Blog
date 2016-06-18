@@ -16,19 +16,19 @@ namespace Blog.Entities
     {
         public Member()
         {
-            this.Articles = new HashSet<Article>();
-            this.Comments = new HashSet<Comment>();
+            this.Article = new HashSet<Article>();
+            this.Comment = new HashSet<Comment>();
         }
     
-        public int MemberID { get; set; }
+        public int MemberId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int Avatar { get; set; }
-        public bool isAdmin { get; set; }
-        public bool isEnabled { get; set; }
+        public int UserPhoto { get; set; }
+        public bool IsAdmin { get; set; }
+        public bool IsEnabled { get; set; }
     
-        public virtual ICollection<Article> Articles { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Article> Article { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
         public virtual MediaFile MediaFile { get; set; }
     }
 }

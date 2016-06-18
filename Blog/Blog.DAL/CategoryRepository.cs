@@ -41,7 +41,7 @@ namespace Blog.DAL
             {
                 ObjectSet<Category> categoryObjectSet = context.CreateObjectSet<Category>();
                 var categoryForUpdate = categoryObjectSet.FirstOrDefault(
-                    cat => cat.CategoryID == category.CategoryID);
+                    cat => cat.CategoryId == category.CategoryId);
 
                 if (categoryForUpdate != null)
                 {

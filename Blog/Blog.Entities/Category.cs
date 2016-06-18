@@ -16,12 +16,12 @@ namespace Blog.Entities
     {
         public Category()
         {
-            this.Articles = new HashSet<Article>();
+            this.Article = new HashSet<Article>();
         }
     
-        public int CategoryID { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Article> Article { get; set; }
     }
 }

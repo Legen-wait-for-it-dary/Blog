@@ -14,11 +14,11 @@ namespace Blog.Entities
     
     public partial class Comment
     {
-        public int CommentID { get; set; }
-        public int ArticleID { get; set; }
-        public string Content { get; set; }
-        public int MemberID { get; set; }
+        public int CommentId { get; set; }
+        public int ArticleId { get; set; }
+        public int MemberId { get; set; }
         public System.DateTime PublishDate { get; set; }
+        public string Content { get; set; }
     
         public virtual Article Article { get; set; }
         public virtual Member Member { get; set; }

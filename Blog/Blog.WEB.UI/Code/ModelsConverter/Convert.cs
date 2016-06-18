@@ -9,16 +9,16 @@ namespace Blog.WEB.UI.Code.ModelsConverter
     {
         public static List<Article> ConvertArtilceEntity(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository)
         {
-            List<Article> convertedArticles = (from article in articleRepository.GetAllArticles()
+            var convertedArticles = (from article in articleRepository.GetAllArticles()
                                              select new Article()
                                              {
-                                                 ArticleId = article.ArticleID,
+                                                 ArticleId = article.ArticleId,
                                                  Title = article.Title,
-                                                 BigImagePath = (article.BigImage == null) ? "" : ImageSaver.SaveImage((int) article.BigImage, mediaFileRepository.GetMediaFileById((int)article.BigImage).Data),
-                                                 Category = categoryRepository.GetCategoryById(article.CategoryID).Name,
+                                                 ArticleCover = (article.ArticleCover == null) ? "" : mediaFileRepository.GetMediaFileById((int)article.ArticleCover).FileName,
+                                                 Category = categoryRepository.GetCategoryById(article.CategoryId).Name,
                                                  Content = article.Content,
-                                                 PostedDate = article.PostedDate,
-                                                 CreateDate = article.CreateDate,
+                                                 PublishDate = article.PublishDate,
+                                                 MemberId = article.MemberId
                                              }).ToList();
 
             return convertedArticles;
@@ -29,7 +29,7 @@ namespace Blog.WEB.UI.Code.ModelsConverter
             List<Category> categories = (from category in categoryRepository.GetAllCategories()
                                                 select new Category()
                                                 {
-                                                    CategoryId = category.CategoryID,
+                                                    CategoryId = category.CategoryId,
                                                     Name = category.Name
                                                 }).ToList();
             return categories;
@@ -40,12 +40,12 @@ namespace Blog.WEB.UI.Code.ModelsConverter
             List<Comment> convertedComments = (from comment in comments
                                              select new Comment()
                                              {
-                                                 ArticleId = comment.ArticleID,
-                                                 CommentId = comment.CommentID,
+                                                 ArticleId = comment.ArticleId,
+                                                 CommentId = comment.CommentId,
                                                  Content = comment.Content,
-                                                 MemberEmail = memberRepository.GetAllMembers().First(mem => mem.MemberID == comment.MemberID).Email,
+                                                 MemberEmail = memberRepository.GetAllMembers().First(mem => mem.MemberId == comment.MemberId).Email,
                                                  PublishDate = comment.PublishDate,
-                                                 MemberAvatar = ImageSaver.SaveImage(memberRepository.GetAllMembers().First(mem => mem.MemberID == comment.MemberID).Avatar, mediaFileRepository.GetMediaFileById(memberRepository.GetAllMembers().First(mem => mem.MemberID == comment.MemberID).Avatar).Data)
+                                                 MemberAvatar =  mediaFileRepository.GetMediaFileById(memberRepository.GetAllMembers().First(mem => mem.MemberId == comment.MemberId).UserPhoto).FileName
                                              }).ToList();
             return convertedComments;
         }

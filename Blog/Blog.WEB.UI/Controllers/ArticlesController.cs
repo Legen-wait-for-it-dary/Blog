@@ -46,7 +46,7 @@ namespace Blog.WEB.UI.Controllers
 
         public ActionResult ShowArticles()
         {
-            return PartialView("_Articles", GetAllArticles());
+            return PartialView("_Articles", GetAllArticles().Where(article => article.PublishDate != null));
         }
 
 

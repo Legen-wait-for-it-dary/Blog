@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Blog.WEB.UI.Models.Category>
+
+    <h1>Add new article</h1>
+    <div class="panel panel-default title-panel">
+        <div class="panel-heading">Title</div>
+        <div class="panel-body">
+            <input id="title" type="text" class="form-control"/>
+        </div>
+    </div>
+    <div class="panel panel-default categories-panel">
+        <div class="panel-heading">Category</div>
+        <div class="panel-body">
+            <select id="category" class="form-control input-md">
+                @foreach (var item in Model)
+                {
+                    <option>@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="panel panel-default big-image-panel">
+        <div class="panel-heading">Article cover</div>
+        <div class="panel-body">
+            <input class="btn btn-default" style="width: 150px; float: left;" type="file" id="entry-image-input" /><input type="button" value="Delete" style="float: left;" class="btn btn-default" id="delete-entry-image" />
+        </div>
+    </div>
+    <div class="panel panel-default content-panel">
+        <div class="panel-body">
+            <div class="add-post-big-image">
+                <img id="article-cover-img" src="" />
+            </div>
+            <textarea id="article"></textarea>
+        </div>
+        <div class="panel-footer">
+            <div class="add-new-post-mng-btns">
+                <button id="publish-btn" type="button" class="btn btn-success">Publish</button>
+                <button id="add-to-rought-copies-btn" type="button" class="btn btn-warning">Add to rough copies</button>
+                <button type="button" class="btn btn-info">Cancel</button>
+            </div>
+        </div>
+    </div>

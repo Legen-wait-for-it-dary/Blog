@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9db21f06b8124f738487a684cc79cc23" Name="Diagram1">
-        <EntityTypeShape EntityType="db_blog_model.Article" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_blog_model.Category" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_blog_model.Comment" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_blog_model.MediaFile" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_blog_model.Member" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <AssociationConnector Association="db_blog_model.FK__Article__author__75A278F5" ManuallyRouted="false" />
-        <AssociationConnector Association="db_blog_model.FK__Article__categor__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="db_blog_model.FK__Comment__id_arti__06CD04F7" ManuallyRouted="false" />
-        <AssociationConnector Association="db_blog_model.FK_Article_Article" ManuallyRouted="false" />
-        <AssociationConnector Association="db_blog_model.FK__Comment__member__07C12930" ManuallyRouted="false" />
+      <Diagram DiagramId="9c5d41df9de8424b988941332923b3ad" Name="Diagram1">
+        <EntityTypeShape EntityType="db_blog_model.Article" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_blog_model.Category" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_blog_model.Comment" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_blog_model.MediaFile" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_blog_model.Member" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="db_blog_model.FK__Article__Article__0697FACD" ManuallyRouted="false" />
+        <AssociationConnector Association="db_blog_model.FK__Article__Categor__05A3D694" ManuallyRouted="false" />
+        <AssociationConnector Association="db_blog_model.FK__Article__MemberI__04AFB25B" ManuallyRouted="false" />
+        <AssociationConnector Association="db_blog_model.FK__Comment__Article__11158940" ManuallyRouted="false" />
+        <AssociationConnector Association="db_blog_model.FK__Comment__MemberI__1209AD79" ManuallyRouted="false" />
         <AssociationConnector Association="db_blog_model.FK_Member_Member" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

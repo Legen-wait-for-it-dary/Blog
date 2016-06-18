@@ -1,61 +1,100 @@
-﻿var categories = [];
-
-var AccountPage = function () {
+var AccountPage = function() {
 
     var that = this;
 
-    this.initPage = function () {
-        $("#add-new-post").on("click", { idOfClickedElement: "add-new-post" }, this.showMyAccountBlock);
-        $("#my-posts").on("click", { idOfClickedElement: "my-posts" }, this.showMyAccountBlock);
-        $("#rough-copies").on("click", { idOfClickedElement: "rough-copies" }, this.showMyAccountBlock);
-        $("#change-email").on("click", { idOfClickedElement: "change-email" }, this.showMyAccountBlock);
-        $("#change-password").on("click", { idOfClickedElement: "change-password" }, this.showMyAccountBlock);
-        $("#change-user-photo").on("click", { idOfClickedElement: "change-user-photo" }, this.showMyAccountBlock);
+    this.initPage = function() {
+        $("#add-new-post,#my-posts,#rough-copies,#change-email,#change-password,#change-user-photo")
+            .on("click",
+                function() {
+                    $(".my-account-mng li").removeClass("selected");
+                    $(this).addClass("selected");
+                    that.showMyAccountBlock($(this).attr("id"));
+                });
+
+        $("#publish-article-btn").on("click", this.publishBtnClick);
+
         $("#entry-image-input").on("change", this.previewFile);
+
+        $("#title").on('click', '.selector', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+        });
+
+        $(".form-inline").on("submit", function() {
+            return false;
+        });
+
         $("#delete-entry-image").on("click", this.deleteEntryImage);
-        $("#add-new-categ").on("click", function () {
-            source.push($("#auto").val());
-            $(this).hide();
-        });
-		
-		
-		
-		
-        $("#auto").autocomplete({
-            source: function (request, response) {
-                var result = $.ui.autocomplete.filter(categories, request.term);
 
-                console.log($.inArray(request.term, result) < 0);
-                $("#add-new-categ").toggle($.inArray(request.term, result) < 0);
-
-                response(result);
-            }
-        });
-
-        $(".form-inline").on("submit", function () { return false; });
-		
-		$("#delete-entry-image").on("click", this.deleteEntryImage);
+        $("#title, textarea")
+            .on("focus",
+                function() {
+                    if ($(this).val() === "") {
+                        console.log($(this).val());
+                    }
+                });
     };
-	
-    this.showMyAccountBlock = function (event) {
-        $("#" + event.data.idOfClickedElement).addClass("selected");
+
+    this.isArticleValid = function() {
+        if ($("#title").val() === "") {
+            if (!$("#empty-title-error-msg").length) {
+                var div = document.createElement("div");
+                $(div).addClass("alert alert-danger");
+                $(div).attr("id", "empty-title-error-msg");
+                $(div).text("Title cannot be empty");
+                $(".title-panel .panel-body").append(div);
+            }
+            return false;
+        }
+
+        if($("#empty-title-error-msg").length){
+            $("#empty-title-error-msg").remove();
+        }
+
+        if (tinyMCE.get('article').getContent() === "") {
+            if (!$("#empty-content-error-msg").length) {
+                var div = document.createElement("div");
+                $(div).addClass("alert alert-danger");
+                $(div).attr("id", "empty-content-error-msg");
+                $(div).text("Article cannot be empty");
+                $(".content-panel .panel-body").append(div);
+            }
+            return false;
+        }
+
+        if($("#empty-content-error-msg").length){
+            $("#empty-content-error-msg").remove();
+        }
+
+
+        return true;
+    }
+
+    this.publishBtnClick = function() {
+        if (that.isArticleValid()) {
+            if ($("#article-cover-img").attr("src") !== "") {
+                console.log("Article is valid");    
+            }
+        }
+    }
+
+    this.showMyAccountBlock = function(idOfClickedElement) {
         var divs = $(".my-account > div");
         for (var i = 0; i < divs.length; i++) {
-            if (!$(divs[i]).hasClass(event.data.idOfClickedElement)) {
-                $(divs[i]).css("display", "none");
-                $("#" + $(divs[i]).attr("class")).removeClass("selected");
+            if ($(divs[i]).hasClass(idOfClickedElement)) {
+                $(divs[i]).show();
             } else {
-                $(divs[i]).css("display", "block");
+                $(divs[i]).hide();
             }
         }
     };
 
-    this.previewFile = function () {
-        var preview = $("#entry-img");
+    this.previewFile = function() {
+        var preview = $("#article-cover-img");
         var file = document.querySelector('input[type=file]').files[0];
         var reader = new FileReader();
 
-        reader.onloadend = function () {
+        reader.onloadend = function() {
             $(preview).attr("src", reader.result);
         }
 
@@ -65,22 +104,19 @@ var AccountPage = function () {
             $(preview).attr("src", "");
         }
 
-        $("#entry-img").css("display", "block");
+        $("#article-cover-img").show();
     };
 
-    this.deleteEntryImage = function () {
-        $("#entry-img").attr("src", "");
+    this.deleteEntryImage = function() {
+        $("#article-cover-img").attr("src", "");
         $(".add-post-big-image img").css("display", "none");
     };
 
-};
+}
 
-$(function () {
+$(function() {
     var myAccountPage = new AccountPage();
     myAccountPage.initPage();
 
-    tinymce.init({ selector: 'textarea' });
-
-    
-
+    tinymce.init({ selector: 'textarea' , plugins: "code image textcolor advlist"});
 });

@@ -9,10 +9,8 @@
             </div>
             <div class="article-meta-data">
                 <div class="article-post-date">
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>@if (item.PostedDate != null)
-                                                                    {
-                                                                        @item.PostedDate.Value.ToLongDateString()
-                                                                    }
+                    <i class="fa fa-clock-o" aria-hmediaFileIdden="true"></i>@item.PublishDate.Value.ToLongDateString()
+                                                                    
                 </div>
                 <div class="article-tag">
                     <i class="fa fa-tags"></i>@item.Category
@@ -23,9 +21,9 @@
             </div>
             <div class="article-img">
                 @{
-    if (@item.BigImagePath != "")
+    if (@item.ArticleCover != "")
     {
-        <img src="@Url.Content("~/Images/"+@item.BigImagePath)"/>            
+        <img src="@Url.Content("~/Images/"+@item.ArticleCover)"/>            
     }
                 }
 
@@ -34,7 +32,7 @@
                 @Html.Raw(@item.Content)
             </div>
         </div>
-       @* @Html.ActionLink("Read more","Article","Article",new {id = @item.ArticleID},new { @class="read-more-btn"})*@
+       @* @Html.ActionLink("Read more","Article","Article",new {mediaFileId = @item.ArticleID},new { @class="read-more-btn"})*@
         @Html.ActionLink("Read more","Index","Article",new {id = @item.ArticleId},new { @class="read-more-btn"})
     </article>
 }

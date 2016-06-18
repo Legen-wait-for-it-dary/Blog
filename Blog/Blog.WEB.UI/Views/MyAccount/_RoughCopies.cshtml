@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Blog.WEB.UI.Models.Article>
+    @foreach (var item in Model)
+    {
+<div class="input-group">
+                        <a href="#" class="list-group-item">@item.Title</a>
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <button art-mediaFileId="@item.ArticleId" type="button" class="btn btn-default open-btn">Open</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button art-mediaFileId="@item.ArticleId" type="button" class="btn btn-default delete-btn">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+}
+

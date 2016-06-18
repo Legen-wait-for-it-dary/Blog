@@ -32,33 +32,27 @@ namespace Blog.DAL
             {
                 ObjectSet<Article> articlesObjectSet = context.CreateObjectSet<Article>();
                 var articleForUpdate = articlesObjectSet.FirstOrDefault(
-                    art => art.ArticleID == article.ArticleID);
+                    art => art.ArticleId == article.ArticleId);
 
                 if (articleForUpdate != null)
                 {
-                    if (articleForUpdate.MemberID != article.MemberID)
-                        articleForUpdate.MemberID = article.MemberID;
+                    if (articleForUpdate.MemberId != article.MemberId)
+                        articleForUpdate.MemberId = article.MemberId;
 
-                    if (articleForUpdate.CategoryID != article.CategoryID)
-                        articleForUpdate.CategoryID = article.CategoryID;
+                    if (articleForUpdate.CategoryId != article.CategoryId)
+                        articleForUpdate.CategoryId = article.CategoryId;
 
                     if (articleForUpdate.Content != article.Content)
                         articleForUpdate.Content = article.Content;
 
-                    if (articleForUpdate.CreateDate != article.CreateDate)
-                        articleForUpdate.CreateDate = article.CreateDate;
-
-                    if (articleForUpdate.PostedDate != article.PostedDate)
-                        articleForUpdate.PostedDate = article.PostedDate;
+                    if (articleForUpdate.PublishDate != article.PublishDate)
+                        articleForUpdate.PublishDate = article.PublishDate;
 
                     if (articleForUpdate.Title != article.Title)
                         articleForUpdate.Title = article.Title;
 
-                    if (articleForUpdate.BigImage != article.BigImage)
-                        articleForUpdate.BigImage = article.BigImage;
-
-                    if (articleForUpdate.isPublished != article.isPublished)
-                        articleForUpdate.isPublished = article.isPublished;
+                    if (articleForUpdate.ArticleCover != article.ArticleCover)
+                        articleForUpdate.ArticleCover = article.ArticleCover;
 
                     context.SaveChanges();
                 }
@@ -77,12 +71,12 @@ namespace Blog.DAL
 
 
 
-        public void DeleteArticle(int idOfArticle)
+        public void DeleteArticle(int articleId)
         {
             using (ObjectContext context = new ObjectContext(_connectionString))
             {
                 ObjectSet<Article> articlesObjectSet = context.CreateObjectSet<Article>();
-                articlesObjectSet.DeleteObject(articlesObjectSet.Single(art => art.ArticleID == idOfArticle));
+                articlesObjectSet.DeleteObject(articlesObjectSet.Single(art => art.ArticleId == articleId));
                 context.SaveChanges();
             }
         }

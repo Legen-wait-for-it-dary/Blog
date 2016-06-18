@@ -15,20 +15,17 @@
 
 @section Body{
     
-   @* @Html.Action("ShowNavbar","Home")*@
+   @Html.Action("ShowNavbar","Home")
     <section class="content">
         <div class="row">
             <section class="col-md-9">
-                <article class="article" art-id="@article.ArticleId">
+                <article class="article" art-mediaFileId="@article.ArticleId">
                     <div class="article-title">
                         @article.Title
                     </div>
                     <div class="article-meta-data">
                         <div class="article-post-date">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>@if (article.PostedDate != null)
-                                                                            {
-                                                                                @article.PostedDate.Value.ToLongDateString()
-                                                                            }
+                            <i class="fa fa-clock-o" aria-hmediaFileIdden="true"></i>article.PublishDate
                         </div>
                         <div class="article-tag">
                             <i class="fa fa-tags"></i>@article.Category
@@ -38,7 +35,7 @@
                         </div>
                     </div>
                     <div class="article-img">
-                        <img src="@Url.Content("~/Images/"+@article.BigImagePath)"/>
+                        <img src="@Url.Content("~/Images/"+@article.ArticleCover)"/>
                     </div>
                     <div class="article-content">
                         @Html.Raw(article.Content)
@@ -54,7 +51,6 @@
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="@Url.Content("~/Images/"+@memberAvatar)">
                             </a>
-
                             <div class="media-body">
                                 <h4 class="media-heading"><span class="comment-user-name">@memberEmail</span></h4>
                                 <div class="add-comment">
@@ -62,7 +58,6 @@
                                     <button type="button" class="btn btn-success" id="add-comment">Add comment</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </article>

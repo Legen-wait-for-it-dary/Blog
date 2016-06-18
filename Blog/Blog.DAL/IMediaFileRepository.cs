@@ -1,18 +1,15 @@
 ﻿using Blog.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blog.DAL
 {
     public interface IMediaFileRepository
     {
         List<MediaFile> GetAllMediaFiles();
-        MediaFile GetMediaFileById(int id);
+        MediaFile GetMediaFileById(int mediaFileId);
         void UpdateMediaFile(MediaFile mediaFile);
         void AddMediaFile(MediaFile mediaFile);
         void DeleteMediaFile(int mediaFileId);
+        decimal? GetNextIndenitityForMediaFile();
     }
 }

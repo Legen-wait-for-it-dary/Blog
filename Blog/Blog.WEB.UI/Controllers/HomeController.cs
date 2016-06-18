@@ -40,5 +40,11 @@ namespace Blog.WEB.UI.Controllers
         {
             return null;
         }
+
+        public ActionResult ShowNavbar()
+        {
+            ViewBag.memberEmail = _securityManager.CurrentUser.Identity.Name;
+            return PartialView("_Navbar");
+        }
     }
 }

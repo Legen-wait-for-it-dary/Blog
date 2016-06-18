@@ -41,7 +41,7 @@ namespace Blog.DAL
             {
                 ObjectSet<Member> membersObjectSet = context.CreateObjectSet<Member>();
                 Member memberForUpdate = (from mem in membersObjectSet
-                                          where mem.MemberID == member.MemberID
+                                          where mem.MemberId == member.MemberId
                                           select mem).First();
 
                 if (memberForUpdate != null)
@@ -52,14 +52,14 @@ namespace Blog.DAL
                     if (memberForUpdate.Password != member.Password)
                         memberForUpdate.Password = member.Password;
 
-                    if (memberForUpdate.Avatar != member.Avatar)
-                        memberForUpdate.Avatar = member.Avatar;
+                    if (memberForUpdate.UserPhoto != member.UserPhoto)
+                        memberForUpdate.UserPhoto = member.UserPhoto;
 
-                    if (memberForUpdate.isAdmin != member.isAdmin)
-                        memberForUpdate.isAdmin = member.isAdmin;
+                    if (memberForUpdate.IsAdmin != member.IsAdmin)
+                        memberForUpdate.IsAdmin = member.IsAdmin;
 
-                    if (memberForUpdate.isEnabled != member.isEnabled)
-                        memberForUpdate.isEnabled = member.isEnabled;
+                    if (memberForUpdate.IsEnabled != member.IsEnabled)
+                        memberForUpdate.IsEnabled = member.IsEnabled;
 
                     
 

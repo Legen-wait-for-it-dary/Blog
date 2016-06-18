@@ -84,7 +84,7 @@ namespace Blog.WEB.UI.Code.Security
         private ClaimsPrincipal CreatePrincipal(Member member)
         {
             List<string> roles = new List<string> {"user"};
-            if (member.isAdmin)
+            if (member.IsAdmin)
             {
                 roles.Add("admin");
             }

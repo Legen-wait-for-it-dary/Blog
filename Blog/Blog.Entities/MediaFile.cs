@@ -16,14 +16,14 @@ namespace Blog.Entities
     {
         public MediaFile()
         {
-            this.Articles = new HashSet<Article>();
-            this.Members = new HashSet<Member>();
+            this.Article = new HashSet<Article>();
+            this.Member = new HashSet<Member>();
         }
     
-        public int MediaFileID { get; set; }
-        public byte[] Data { get; set; }
+        public int MediaFileId { get; set; }
+        public string FileName { get; set; }
     
-        public virtual ICollection<Article> Articles { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual ICollection<Article> Article { get; set; }
+        public virtual ICollection<Member> Member { get; set; }
     }
 }

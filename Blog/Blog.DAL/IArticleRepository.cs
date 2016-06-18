@@ -8,6 +8,6 @@ namespace Blog.DAL
         List<Article> GetAllArticles();
         void UpdateArticle(Article article);
         void AddArticle(Article article);
-        void DeleteArticle(int idOfArticle);
+        void DeleteArticle(int articleId);
     }
 }

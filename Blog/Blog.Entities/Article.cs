@@ -16,22 +16,20 @@ namespace Blog.Entities
     {
         public Article()
         {
-            this.Comments = new HashSet<Comment>();
+            this.Comment = new HashSet<Comment>();
         }
     
-        public int ArticleID { get; set; }
+        public int ArticleId { get; set; }
+        public int MemberId { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
-        public Nullable<int> BigImage { get; set; }
-        public int CategoryID { get; set; }
-        public int MemberID { get; set; }
+        public Nullable<int> ArticleCover { get; set; }
+        public Nullable<System.DateTime> PublishDate { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> PostedDate { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public bool isPublished { get; set; }
     
-        public virtual Member Member { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
         public virtual MediaFile MediaFile { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Member Member { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
     }
 }

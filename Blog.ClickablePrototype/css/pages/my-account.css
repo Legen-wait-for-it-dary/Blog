@@ -5,6 +5,7 @@
 /*/aside*/
 .add-new-post,
 .rough-copies,
+.my-posts,
 .change-email,
 .change-password,
 .change-user-photo,
@@ -12,7 +13,17 @@
     display:none;
 }
 /*add-new-post*/
-#add-new-categ { display: none; }
+.add-new-post .panel{
+  float: left;
+}
+
+.categories-panel, .title-panel{
+  width: 33.3%;
+}
+
+.content-panel{
+  width: 100%;
+}
 
 .add-post-big-image img{
     width:100%;
@@ -23,6 +34,7 @@
 textarea{
     width:100%;
     display:block;
+    min-height: 300px;
     
 }
 
@@ -55,3 +67,14 @@ textarea{
     margin: 0;
     padding: 5px 10px;
   }
+
+/*categories*/
+.categories form{
+  max-width: 50%;
+}
+/*/categories*/
+
+.title-panel .alert, .contet-panel .alert {
+    padding: 2px;
+    margin: 2px 0;
+}

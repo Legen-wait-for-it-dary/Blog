@@ -31,7 +31,7 @@ namespace Blog.DAL
             using (ObjectContext context = new ObjectContext(_connectionString))
             {
                 ObjectSet<Comment> commentsObjectSet = context.CreateObjectSet<Comment>();
-                return commentsObjectSet.Where(com => com.ArticleID == articleId).ToList();
+                return commentsObjectSet.Where(com => com.ArticleId == articleId).ToList();
             }
         }
 

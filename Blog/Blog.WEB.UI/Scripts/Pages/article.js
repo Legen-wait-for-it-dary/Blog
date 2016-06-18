@@ -9,7 +9,7 @@
     this.addCommentClick = function () {
         var content = $("#add-comment-content").val();
         var articles = $(".article");
-        var articleId = $(articles[0]).attr("art-id");
+        var articleId = $(articles[0]).attr("art-mediaFileId");
 
         var xhr = $.ajax({
             url: "/Article/AddComment",
