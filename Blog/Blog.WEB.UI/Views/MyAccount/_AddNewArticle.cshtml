@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Blog.WEB.UI.Models.Category>
-
-    <h1>Add new article</h1>
+<article article-id="">
+<h1 id="article-header">Add new article</h1>
     <div class="panel panel-default title-panel">
         <div class="panel-heading">Title</div>
         <div class="panel-body">
@@ -13,7 +13,7 @@
             <select id="category" class="form-control input-md">
                 @foreach (var item in Model)
                 {
-                    <option>@item.Name</option>
+                    <option value="@item.Name">@item.Name</option>
                 }
             </select>
         </div>
@@ -35,7 +35,7 @@
             <div class="add-new-post-mng-btns">
                 <button id="publish-btn" type="button" class="btn btn-success">Publish</button>
                 <button id="add-to-rough-copies-btn" type="button" class="btn btn-warning">Add to rough copies</button>
-                <button type="button" class="btn btn-info">Cancel</button>
             </div>
         </div>
     </div>
+</article>

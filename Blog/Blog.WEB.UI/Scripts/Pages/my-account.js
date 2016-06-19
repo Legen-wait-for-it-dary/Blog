@@ -11,18 +11,53 @@ var AccountPage = function () {
                     $(this).addClass("selected");
                     that.showMyAccountBlock($(this).attr("id"));
                 });
+
         $("#my-posts").on("click", this.myPostsClick);
         $("#rough-copies").on("click", this.myRoughCopiesClick);
-        $("#entry-image-input").on("change", this.previewFile);
+
+        $("#entry-image-input").on("change", this.entryImageChanged);
         $("#delete-entry-image").on("click", this.deleteArticleCoverImage);
         $("#publish-btn").on("click", this.publishBtnClick);
         $("#add-to-rough-copies-btn").on("click", this.addToRoughCopiesBtnClick);
         $(".form-inline").on("submit", function () { return false; });
     };
 
-    this.deleteArticle = function() {
+    this.updateArticleClick = function () {
+        var aricleId = $(this).attr("art-id");
+        $(".my-account-mng li").removeClass("selected");
+        $("#add-new-post").addClass("selected");
+
+        $.ajax({
+            url: "/MyAccount/GetArticleById",
+            dataType: "json",
+            type: "GET",
+            data: {
+                articleId: aricleId
+            },
+            success: function (data) {
+                var article = $("article").get(0);
+                $(article).attr("article-id", aricleId);
+                $("#title").val(data.title);
+                $("#category").val(data.category);
+
+                if (data.articleCover !== "") {
+                    console.log("here");
+                    $("#article-cover-img").attr("src", data.articleCover);
+                    $("#article-cover-img").show();
+                }
+                tinyMCE.get('article').setContent(data.content);
+                that.showMyAccountBlock("add-new-post");
+            },
+            error: function () {
+                console.log("updateArticle error");
+            }
+        });
+
+    };
+
+    this.deleteArticleClick = function() {
         console.log($(this).attr("art-id"));
-        var xhr = $.ajax({
+        $.ajax({
             url: "/MyAccount/DeleteArticle",
             dataType: "json",
             type: "POST",
@@ -31,6 +66,9 @@ var AccountPage = function () {
             },
             success: function() {
                 location.reload();
+            },
+            error: function () {
+                console.log("Deleting article error");
             }
         });
     };
@@ -96,14 +134,16 @@ var AccountPage = function () {
                     .text("Update")
                     .attr("art-id", articleId);
 
+        $(updateBtn).on('click', that.updateArticleClick);
+
         var deleteBtn = document.createElement("button");
         $(deleteBtn).addClass("btn btn-default delete-btn")
                     .text("Delete")
                     .attr("art-id", articleId);
 
-        $(deleteBtn).on('click', that.deleteArticle);
+        $(deleteBtn).on('click', that.deleteArticleClick);
 
-        $(updateBtnGroup).append(updateBtn)
+        $(updateBtnGroup).append(updateBtn);
         $(deleteBtnGroup).append(deleteBtn);
 
         $(inputGroupBtn)
@@ -175,7 +215,7 @@ var AccountPage = function () {
         var formattedText = tinyMCE.get('article').getContent();
         var title = $("#title").val();
         var category = $('#category').find(":selected").text();
-
+        var articleId = $("article").attr("article-id");
         $.ajax({
             url: "/MyAccount/UploadArticle",
             dataType: "json",
@@ -185,7 +225,8 @@ var AccountPage = function () {
                 mediaFileId: mediaFileId,
                 title: title,
                 category: category,
-                iSForPublishing: iSForPublishing
+                iSForPublishing: iSForPublishing,
+                articleId: articleId
             },
             success: function () {
                 location.reload();
@@ -231,22 +272,25 @@ var AccountPage = function () {
         }
     };
 
-    this.previewFile = function () {
+    this.entryImageChanged = function () {
         var preview = $("#article-cover-img");
         var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
+        that.previewFile(preview, file);
+        
+        $("#article-cover-img").show();
+    };
 
+    this.previewFile = function(element,file) {
+        var reader = new FileReader();
         reader.onloadend = function () {
-            $(preview).attr("src", reader.result);
+            $(element).attr("src", reader.result);
         }
 
         if (file) {
             reader.readAsDataURL(file);
         } else {
-            $(preview).attr("src", "");
+            $(element).attr("src", "");
         }
-
-        $("#article-cover-img").show();
     };
 
     this.deleteArticleCoverImage = function () {

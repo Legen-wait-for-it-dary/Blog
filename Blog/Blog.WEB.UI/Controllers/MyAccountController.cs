@@ -18,18 +18,15 @@ namespace Blog.WEB.UI.Controllers
     {
         private readonly IArticleRepository _articleRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly ICommentRepository _commentRepository;
         private readonly ISecurityManager _securityManager;
         private readonly IMemberRepository _memberRepository;
         private readonly IMediaFileRepository _mediaFileRepository;
 
-        public MyAccountController(IMemberRepository memberRepository, IArticleRepository articleRepository, ICategoryRepository categoryRepository,
-                              ICommentRepository commentRepository, IMediaFileRepository mediaFileRepository, ISecurityManager securityManager)
+        public MyAccountController(IMemberRepository memberRepository, IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository, ISecurityManager securityManager)
         {
             _memberRepository = memberRepository;
             _articleRepository = articleRepository;
             _categoryRepository = categoryRepository;
-            _commentRepository = commentRepository;
             _securityManager = securityManager;
             _mediaFileRepository = mediaFileRepository;
         }
@@ -52,6 +49,18 @@ namespace Blog.WEB.UI.Controllers
 
         }
 
+        //Get: /MyAccount/GetArticleById
+        [HttpGet]
+        public ActionResult GetArticleById(int articleId)
+        {
+            Article article = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
+                _mediaFileRepository)
+                .First(
+                    art => art.ArticleId == articleId
+                        );
+            return Json(new { title = article.Title, category = article.Category, content = article.Content, articleCover = ImageManager.GetImage(article.ArticleCover)}, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: /MyAccount/GetMyPublishedPosts
         [HttpGet]
         public ActionResult GetMyPublishedPosts()
@@ -71,8 +80,8 @@ namespace Blog.WEB.UI.Controllers
             {
                 Debug.WriteLine(exception.Message);
             }
-            
-            return Json(new { data = response },JsonRequestBehavior.AllowGet); 
+
+            return Json(new { data = response }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: /MyAccount/GetMyRoughCopies
@@ -95,7 +104,7 @@ namespace Blog.WEB.UI.Controllers
                 Debug.WriteLine(exception.Message);
             }
 
-            return Json(new { data = response }, JsonRequestBehavior.AllowGet); 
+            return Json(new { data = response }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ShowAddArticle()
@@ -134,7 +143,7 @@ namespace Blog.WEB.UI.Controllers
                         if (nextIndenitityForMediaFile != null)
                             _mediaFileRepository.AddMediaFile(new MediaFile()
                             {
-                                FileName = ImageSaver.SaveImage((int)nextIndenitityForMediaFile, binaryReader.ReadBytes(picture.ContentLength))
+                                FileName = ImageManager.SaveImage((int)nextIndenitityForMediaFile, binaryReader.ReadBytes(picture.ContentLength))
                             });
                     }
             }
@@ -144,22 +153,40 @@ namespace Blog.WEB.UI.Controllers
 
         // POST: /MyAccount/UploadArticle
         [HttpPost]
-        public ActionResult UploadArticle(string formattedText, string mediaFileId, string title, string category, bool iSForPublishing)
+        public ActionResult UploadArticle(string formattedText, string mediaFileId, string title, string category, bool iSForPublishing, int? articleId)
         {
             var decodedText = Server.UrlDecode(formattedText);
             var categoryOfArticle = _categoryRepository.GetAllCategories().FirstOrDefault(c => c.Name == category);
             if (categoryOfArticle != null)
             {
                 int iMediaFileId;
-                _articleRepository.AddArticle(new Entities.Article()
-            {
-                Title = title,
-                Content = decodedText,
-                MemberId = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId,
-                PublishDate = (iSForPublishing)?DateTime.Now:(DateTime?) null,
-                CategoryId = categoryOfArticle.CategoryId,
-                ArticleCover = (int.TryParse(mediaFileId, out iMediaFileId))?(int?)iMediaFileId:null
-            });
+
+                if (articleId == null)
+                {
+                    _articleRepository.AddArticle(new Entities.Article()
+                    {
+                        Title = title,
+                        Content = decodedText,
+                        MemberId = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId,
+                        PublishDate = (iSForPublishing) ? DateTime.Now : (DateTime?) null,
+                        CategoryId = categoryOfArticle.CategoryId,
+                        ArticleCover = (int.TryParse(mediaFileId, out iMediaFileId)) ? (int?) iMediaFileId : null
+                    });
+                }
+                else
+                {
+                    _articleRepository.UpdateArticle(new Entities.Article()
+                    {
+                        ArticleId = (int)articleId,
+                        Title = title,
+                        Content = decodedText,
+                        MemberId = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId,
+                        PublishDate = (iSForPublishing) ? DateTime.Now : (DateTime?)null,
+                        CategoryId = categoryOfArticle.CategoryId,
+                        ArticleCover = (int.TryParse(mediaFileId, out iMediaFileId)) ? (int?)iMediaFileId : null
+                    });
+                }
+
             }
             return Json(new object());
         }

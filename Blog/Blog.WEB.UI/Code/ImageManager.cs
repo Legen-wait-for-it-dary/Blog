@@ -1,11 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Hosting;
 
 namespace Blog.WEB.UI.Code
 {
-    public static class ImageSaver
+    public static class ImageManager
     {
         public static string SaveImage(int mediaFileId, byte [] buffer)
         {
@@ -32,6 +33,20 @@ namespace Blog.WEB.UI.Code
                     }
                     return fileName;
                 }
+            }
+        }
+
+        public static string GetImage(string fileName)
+        {
+            string serverRootDirectory = HostingEnvironment.MapPath(@"/Images/");
+            string path = serverRootDirectory + fileName;
+            if (serverRootDirectory != null)
+            {
+                return @"data:image/gif;base64," + Convert.ToBase64String(File.ReadAllBytes(path));
+            }
+            else
+            {
+                return null;
             }
         }
     }

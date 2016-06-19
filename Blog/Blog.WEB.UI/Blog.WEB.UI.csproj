@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Code\ImageSaver.cs" />
+    <Compile Include="Code\ImageManager.cs" />
     <Compile Include="Code\ModelsConverter\Convert.cs" />
     <Compile Include="Code\Security\FormsSecurityManager.cs" />
     <Compile Include="Code\Security\ISecurityManager.cs" />
