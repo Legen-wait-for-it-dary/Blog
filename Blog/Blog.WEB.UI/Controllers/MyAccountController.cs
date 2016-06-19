@@ -144,7 +144,7 @@ namespace Blog.WEB.UI.Controllers
 
         // POST: /MyAccount/UploadArticle
         [HttpPost]
-        public ActionResult UploadArticle(string formattedText, string mediaFileId, string title, string category)
+        public ActionResult UploadArticle(string formattedText, string mediaFileId, string title, string category, bool iSForPublishing)
         {
             var decodedText = Server.UrlDecode(formattedText);
             var categoryOfArticle = _categoryRepository.GetAllCategories().FirstOrDefault(c => c.Name == category);
@@ -156,7 +156,7 @@ namespace Blog.WEB.UI.Controllers
                 Title = title,
                 Content = decodedText,
                 MemberId = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId,
-                PublishDate = DateTime.Now,
+                PublishDate = (iSForPublishing)?DateTime.Now:(DateTime?) null,
                 CategoryId = categoryOfArticle.CategoryId,
                 ArticleCover = (int.TryParse(mediaFileId, out iMediaFileId))?(int?)iMediaFileId:null
             });

@@ -16,6 +16,7 @@ var AccountPage = function () {
         $("#entry-image-input").on("change", this.previewFile);
         $("#delete-entry-image").on("click", this.deleteArticleCoverImage);
         $("#publish-btn").on("click", this.publishBtnClick);
+        $("#add-to-rough-copies-btn").on("click", this.addToRoughCopiesBtnClick);
         $(".form-inline").on("submit", function () { return false; });
     };
 
@@ -152,15 +153,25 @@ var AccountPage = function () {
     this.publishBtnClick = function () {
         if (that.isArticleValid()) {
             if ($("#article-cover-img").attr("src") !== "") {
-                that.uploadImageToServer();
+                that.uploadImageToServer(true,that.uploadArticle);
             } else {
-                that.uploadArticle(null);
+                that.uploadArticle(null,true);
             }
-            
         }
     };
 
-    this.uploadArticle = function (mediaFileId) {
+    this.addToRoughCopiesBtnClick = function () {
+        if (that.isArticleValid()) {
+            if ($("#article-cover-img").attr("src") !== "") {
+                that.uploadImageToServer(false, that.uploadArticle);
+            } else {
+                that.uploadArticle(null,false);
+            }
+
+        }
+    };
+
+    this.uploadArticle = function (mediaFileId,iSForPublishing) {
         var formattedText = tinyMCE.get('article').getContent();
         var title = $("#title").val();
         var category = $('#category').find(":selected").text();
@@ -173,7 +184,8 @@ var AccountPage = function () {
                 formattedText: escape(formattedText),
                 mediaFileId: mediaFileId,
                 title: title,
-                category: category
+                category: category,
+                iSForPublishing: iSForPublishing
             },
             success: function () {
                 location.reload();
@@ -184,7 +196,7 @@ var AccountPage = function () {
         });
     };
 
-    this.uploadImageToServer = function () {
+    this.uploadImageToServer = function (iSForPublishing,callback) {
         var data = new FormData();
         var files = $('input[type=file]').get(0).files;
         if (files.length > 0) {
@@ -198,12 +210,13 @@ var AccountPage = function () {
             contentType: false,
             data: data,
             error: function () {
+
                 console.log("Image upload error");
             }
         });
 
         xhr.done(function (data) {
-            that.uploadArticle(data.mediaFileId);
+            callback(data.mediaFileId, iSForPublishing);
         });
     };
 
