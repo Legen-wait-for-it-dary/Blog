@@ -11,30 +11,108 @@ var AccountPage = function () {
                     $(this).addClass("selected");
                     that.showMyAccountBlock($(this).attr("id"));
                 });
-
+        $("#my-posts").on("click", this.myPostsClick);
+        $("#rough-copies").on("click", this.myRoughCopiesClick);
         $("#entry-image-input").on("change", this.previewFile);
         $("#delete-entry-image").on("click", this.deleteArticleCoverImage);
-
         $("#publish-btn").on("click", this.publishBtnClick);
-
-
-        $(".delete-btn").on("click", function () {
-            var xhr = $.ajax({
-                url: "/MyAccount/DeleteArticle",
-                dataType: "json",
-                type: "POST",
-                data: {
-                    articleID: $(this).attr("art-mediaFileId")
-                },
-                success: function () {
-                    location.reload();
-                }
-            });
-        });
-
-
         $(".form-inline").on("submit", function () { return false; });
     };
+
+    this.deleteArticle = function() {
+        console.log($(this).attr("art-id"));
+        var xhr = $.ajax({
+            url: "/MyAccount/DeleteArticle",
+            dataType: "json",
+            type: "POST",
+            data: {
+                articleId: $(this).attr("art-id")
+            },
+            success: function() {
+                location.reload();
+            }
+        });
+    };
+
+    this.myRoughCopiesClick = function () {
+        $.ajax({
+            url: "/MyAccount/GetMyRoughCopies",
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+                var responseArr = jQuery.parseJSON(data.data);
+                var allPropertyNames = Object.keys(responseArr);
+                $(".rough-copies > * ").remove();
+                for (var i = 0; i < allPropertyNames.length; i++) {
+                    that.createPostsList($(".rough-copies"), allPropertyNames[i], responseArr[allPropertyNames[i]]);
+                };
+            },
+            error: function () {
+                console.log("my post error");
+            }
+        });
+    };
+
+    this.myPostsClick = function () {
+        $.ajax({
+            url: "/MyAccount/GetMyPublishedPosts",
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+                var responseArr = jQuery.parseJSON(data.data);
+                var allPropertyNames = Object.keys(responseArr);
+                $(".my-posts > * ").remove();
+                for (var i = 0; i < allPropertyNames.length; i++) {
+                    that.createPostsList($(".my-posts"),allPropertyNames[i], responseArr[allPropertyNames[i]]);
+                };
+            },
+            error: function () {
+                console.log("my post error");
+            }
+        });
+    };
+
+    this.createPostsList = function (root,articleId, articleTitle) {
+        var inputGroupDiv = document.createElement("div");
+        $(inputGroupDiv).addClass("input-group");
+
+        var a = document.createElement("a");
+        $(a).addClass("list-group-item");
+        $(a).text(articleTitle);
+        $(a).attr("href", "/Article/Index/" + articleId);
+        $(inputGroupDiv).append(a);
+
+        var inputGroupBtn = document.createElement("div");
+        $(inputGroupBtn).addClass("input-group-btn");
+
+        var updateBtnGroup = document.createElement("div");
+        $(updateBtnGroup).addClass("btn-group");
+        var deleteBtnGroup = document.createElement("div");
+        $(deleteBtnGroup).addClass("btn-group");
+
+        var updateBtn = document.createElement("button");
+        $(updateBtn).addClass("btn btn-default update-btn")
+                    .text("Update")
+                    .attr("art-id", articleId);
+
+        var deleteBtn = document.createElement("button");
+        $(deleteBtn).addClass("btn btn-default delete-btn")
+                    .text("Delete")
+                    .attr("art-id", articleId);
+
+        $(deleteBtn).on('click', that.deleteArticle);
+
+        $(updateBtnGroup).append(updateBtn)
+        $(deleteBtnGroup).append(deleteBtn);
+
+        $(inputGroupBtn)
+                        .append(updateBtnGroup)
+                        .append(deleteBtnGroup);
+
+        $(inputGroupDiv).append(inputGroupBtn);
+
+        $(root).append(inputGroupDiv);
+    }
 
     this.isArticleValid = function () {
         var div;
@@ -98,7 +176,6 @@ var AccountPage = function () {
                 category: category
             },
             success: function () {
-                console.log("uploadArticle success");
                 location.reload();
             },
             error: function () {
@@ -126,7 +203,6 @@ var AccountPage = function () {
         });
 
         xhr.done(function (data) {
-            console.log("uploadImageToServer done" + data.mediaFileId);
             that.uploadArticle(data.mediaFileId);
         });
     };
@@ -171,3 +247,4 @@ $(function () {
     var myAccountPage = new AccountPage();
     myAccountPage.initPage();
 });
+

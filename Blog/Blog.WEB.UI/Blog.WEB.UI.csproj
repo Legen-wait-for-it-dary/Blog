@@ -167,7 +167,6 @@
     <Content Include="Images\img.png" />
     <Content Include="Scripts\Libs\bootstrap-3.3.6\bootstrap.min.js" />
     <Content Include="Scripts\Libs\jquery-1.12.0\jquery.min.js" />
-    <Content Include="Scripts\Libs\tinymce\example.html" />
     <Content Include="Scripts\Libs\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\Libs\tinymce\license.txt" />
     <Content Include="Scripts\Libs\tinymce\plugins\advlist\plugin.min.js" />
@@ -282,16 +281,14 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\_Comments.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
-    <Content Include="Views\MyAccount\Index.cshtml" />
-    <Content Include="Views\MyAccount\_MyPosts.cshtml" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\MyAccount\Index.cshtml" />
     <Content Include="Views\MyAccount\_AddNewArticle.cshtml" />
-    <Content Include="Views\MyAccount\_RoughCopies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">

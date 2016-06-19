@@ -15,11 +15,18 @@ var AccountPage = function() {
 
         $("#entry-image-input").on("change", this.previewFile);
 
-        $("#title").on('click', '.selector', function(event) {
-            event.preventDefault();
-            /* Act on the event */
+
+        $("#my-posts").on("click", this.myPostsClick);
+        $("#rough-copies").on("click", function(){
+
+        });
+        $(".btn-group").on("click",".update-btn" ,function(){
+            console.log("here");
+            $(".my-posts > * ").remove();    
         });
 
+
+        
         $(".form-inline").on("submit", function() {
             return false;
         });
@@ -35,6 +42,65 @@ var AccountPage = function() {
                 });
     };
 
+    this.myPostsClick = function() {
+        var data = {"6":"Title","7":"fewfew","8":"ewefwwe","9":"3333","10":"vevwwev"};
+
+        $(".my-posts > * ").remove();  
+        var allPropertyNames = Object.keys(data);
+        console.log(allPropertyNames.length);
+        for (var i = 0; i < allPropertyNames.length; i++) {
+            that.createDOMElement(allPropertyNames[i],data[allPropertyNames[i]]);
+        };
+
+        
+    };
+
+    this.createDOMElement = function (articleId,articleTitle){
+        var inputGroupDiv = document.createElement("div");
+        $(inputGroupDiv).addClass("input-group");
+        
+        var a = document.createElement("a");
+        $(a).addClass("list-group-item");
+        $(a).text(articleTitle);
+        $(a).attr("href","/Article/Index/"+articleId);
+        $(inputGroupDiv).append(a);
+
+        var inputGroupBtn = document.createElement("div");
+        $(inputGroupBtn).addClass("input-group-btn");
+
+        var updateBtnGroup = document.createElement("div");
+        $(updateBtnGroup).addClass("btn-group");
+        var deleteBtnGroup = document.createElement("div");
+        $(deleteBtnGroup).addClass("btn-group");
+
+        var updateBtn = document.createElement("button");
+        $(updateBtn).addClass("btn btn-default update-btn")
+                    .text("Update")
+                    .attr("art-id",articleId);
+
+        var deleteBtn = document.createElement("button");
+        $(deleteBtn).addClass("btn btn-default delete-btn")
+                    .text("Delete")
+                    .attr("art-id",articleId);
+
+        $(deleteBtn).on('click', function(event) {
+            console.log("effefe");
+        });
+
+        $(updateBtnGroup).append(updateBtn)
+        $(deleteBtnGroup).append(deleteBtn);
+
+        $(inputGroupBtn)
+                        .append(updateBtnGroup)
+                        .append(deleteBtnGroup);
+
+        $(inputGroupDiv).append(inputGroupBtn);
+
+        $(".my-posts").append(inputGroupDiv);
+    }
+
+
+
     this.isArticleValid = function() {
         if ($("#title").val() === "") {
             if (!$("#empty-title-error-msg").length) {
@@ -47,7 +113,7 @@ var AccountPage = function() {
             return false;
         }
 
-        if($("#empty-title-error-msg").length){
+        if ($("#empty-title-error-msg").length) {
             $("#empty-title-error-msg").remove();
         }
 
@@ -62,7 +128,7 @@ var AccountPage = function() {
             return false;
         }
 
-        if($("#empty-content-error-msg").length){
+        if ($("#empty-content-error-msg").length) {
             $("#empty-content-error-msg").remove();
         }
 
@@ -73,7 +139,7 @@ var AccountPage = function() {
     this.publishBtnClick = function() {
         if (that.isArticleValid()) {
             if ($("#article-cover-img").attr("src") !== "") {
-                console.log("Article is valid");    
+                console.log("Article is valid");
             }
         }
     }
@@ -118,5 +184,5 @@ $(function() {
     var myAccountPage = new AccountPage();
     myAccountPage.initPage();
 
-    tinymce.init({ selector: 'textarea' , plugins: "code image textcolor advlist"});
+    tinymce.init({ selector: 'textarea', plugins: "code image textcolor advlist" });
 });

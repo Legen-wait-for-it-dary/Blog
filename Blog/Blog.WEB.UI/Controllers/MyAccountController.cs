@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ using Blog.DAL;
 using Blog.Entities;
 using Blog.WEB.UI.Code;
 using Blog.WEB.UI.Code.Security;
+using Newtonsoft.Json;
 using Article = Blog.WEB.UI.Models.Article;
 
 namespace Blog.WEB.UI.Controllers
@@ -50,7 +52,9 @@ namespace Blog.WEB.UI.Controllers
 
         }
 
-        public ActionResult ShowMyPosts()
+        // GET: /MyAccount/GetMyPublishedPosts
+        [HttpGet]
+        public ActionResult GetMyPublishedPosts()
         {
             List<Article> articleList = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
                 _mediaFileRepository)
@@ -58,10 +62,22 @@ namespace Blog.WEB.UI.Controllers
                     art =>
                         art.PublishDate != null &&
                         art.MemberId == _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId).ToList();
-            return PartialView("_MyPosts", articleList);
+            string response = null;
+            try
+            {
+                response = JsonConvert.SerializeObject(articleList.ToDictionary(a => a.ArticleId, s => s.Title));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception.Message);
+            }
+            
+            return Json(new { data = response },JsonRequestBehavior.AllowGet); 
         }
 
-        public ActionResult ShowRoughCopies()
+        // GET: /MyAccount/GetMyRoughCopies
+        [HttpGet]
+        public ActionResult GetMyRoughCopies()
         {
             List<Article> articleList = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
                 _mediaFileRepository)
@@ -69,7 +85,17 @@ namespace Blog.WEB.UI.Controllers
                     art =>
                         art.PublishDate == null &&
                         art.MemberId == _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId).ToList();
-            return PartialView("_RoughCopies", articleList);
+            string response = null;
+            try
+            {
+                response = JsonConvert.SerializeObject(articleList.ToDictionary(a => a.ArticleId, s => s.Title));
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception.Message);
+            }
+
+            return Json(new { data = response }, JsonRequestBehavior.AllowGet); 
         }
 
         public ActionResult ShowAddArticle()
@@ -135,9 +161,7 @@ namespace Blog.WEB.UI.Controllers
                 ArticleCover = (int.TryParse(mediaFileId, out iMediaFileId))?(int?)iMediaFileId:null
             });
             }
-            return
-
-        Json(new object());
+            return Json(new object());
         }
     }
 }
