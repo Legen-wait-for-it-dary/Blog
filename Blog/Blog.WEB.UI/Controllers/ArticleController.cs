@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Blog.DAL;
 using Blog.Entities;
-using Blog.WEB.UI.Code;
 using Blog.WEB.UI.Code.Security;
 
 namespace Blog.WEB.UI.Controllers
@@ -28,29 +27,27 @@ namespace Blog.WEB.UI.Controllers
             _securityManager = securityManager;
             _mediaFileRepository = mediaFileRepository;
         }
-        
+
         //
         // GET: /Article/
 
+        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "PageNotFound")]
         public ActionResult Index(int id)
         {
             if (_securityManager.IsAuthenticated)
             {
                 ViewBag.email = _securityManager.CurrentUser.Identity.Name;
-                try
-                {
-                    ViewBag.article = GetAllArticles().First(art => art.ArticleId == id);
+                ViewBag.article = GetAllArticles().First(art => art.ArticleId == id);
+
                     Member member = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name);
                     ViewBag.memberAvatar = _mediaFileRepository.GetMediaFileById(member.UserPhoto).FileName;
                     ViewBag.numOfComments = _commentRepository.GetAllComments().Where(com => com.ArticleId == id).ToList().Count;
                     return View();
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception(exc.Message);
-                }
             }
-            return RedirectToAction("Index", "Home");
+            else
+            {
+                return RedirectToAction("Index", "Home");    
+            }
         }
 
         [HttpPost]
@@ -91,7 +88,7 @@ namespace Blog.WEB.UI.Controllers
         [ChildActionOnly]
         public List<Models.Article> GetAllArticles()
         {
-            return Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository,_categoryRepository,_mediaFileRepository);
+            return Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository);
         }
 
         [ChildActionOnly]

@@ -13,12 +13,10 @@
     <script src="../js/libs/bootstrap-3.3.6/bootstrap.min.js"></script>
     <!--/bootstrap-->
     <!--styles-->
-    <link rel="stylesheet" href="../css/common/reset.css" />
     <link rel="stylesheet" href="../css/common/common.css" />
     <link rel="stylesheet" href="../css/pages/sign-up.css" />
     <!--/styles-->
     <!--scripts-->
-    <script src="../js/common/common.js"></script>
     <script src="../js/pages/sign-up.js"></script>
     <!--/scripts-->
 </head>
@@ -31,10 +29,9 @@
                         <label for="sign-in-email">Email</label>
                         <input type="email" data-val="true" data-val-regex-pattern="^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" class="form-control" id="sign-in-email" placeholder="Email">
 					</div>
-					<div class="alert alert-danger" role="alert" id="sign-in-email-error"></div>
-                    <div class="form-group">
+					<div class="form-group">
                         <label for="sign-in-password">Password</label>
-                        <input type="password" class="form-control" id="sign-in-password" placeholder="Password">
+                        <input type="password" data-val="true" class="form-control" id="sign-in-password" placeholder="Password">
                     </div>
 					<div class="alert alert-danger" role="alert" id="sign-in-email-password"></div>
                     <div class="form-group">
@@ -53,20 +50,16 @@
                         <label for="sign-up-email">Email</label>
                         <input type="email" data-val="true" data-val-regex-pattern="^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" class="form-control" id="sign-up-email" placeholder="Email">
                     </div>
-					<div class="alert alert-danger" role="alert" id="sign-up-email-error">Error</div>
-                    <div class="form-group">
+					<div class="form-group">
                         <label for="sign-up-password">Password</label>
                         <input type="password" class="form-control" id="sign-up-password" placeholder="Password">
                     </div>
-					<div class="alert alert-danger" role="alert" id="sign-up-password">Error</div>
-                    <div class="form-group">
+					<div class="form-group">
                         <label for="sign-up-rep-password">Repeat password</label>
                         <input type="password" class="form-control" id="sign-up-rep-password" placeholder="Password">
                     </div>
-					<div class="alert alert-danger" role="alert" id="sign-up-rep-email-error">Error</div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">User photo</label>
-                        <input type="file" id="File1">
+					<div class="form-group">
+                        <p class="help-block"><a href="#" id="sign-in-link">Back to sign in</a></p>
                     </div>
                     <button type="submit" class="btn btn-default" id="submit-sign-up">Sign up</button>
                 </form>

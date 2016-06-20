@@ -1,44 +1,74 @@
-﻿using System.Web.Mvc;
-//using Blog.DAL;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
+using Blog.DAL;
+using Blog.Entities;
 using Blog.WEB.UI.Code.Security;
 
 namespace Blog.WEB.UI.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly IMemberRepository _memberRepository;
+        private readonly IMemberRepository _memberRepository;
         private readonly ISecurityManager _securityManager;
 
-        public HomeController(/*IMemberRepository memberRepository, */ISecurityManager securityManager)
+        public HomeController(IMemberRepository memberRepository, ISecurityManager securityManager)
         {
-            //_memberRepository = memberRepository;
+            _memberRepository = memberRepository;
             _securityManager = securityManager;
         }
         
         //
         // GET: /Home/
-
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignIn(string email, string password)
+        public ActionResult SignIn(Models.LoginMemberModel member)
         {
-            object userEmail = null;
-
-            if (_securityManager.Login(email, password))
+            if (ModelState.IsValid)
             {
-                userEmail = _securityManager.CurrentUser.Identity.Name;
+                if (_securityManager.Login(member.Email, member.Password))
+                {
+                    return RedirectToAction("Index", "Articles");
+                }
             }
-
-            return Json(userEmail);
+            ModelState.AddModelError("","Incorrect login or password");
+            return View("Index");
         }
 
-        public ActionResult SignUp()
+        public ActionResult SignUp(Models.RegisterMemberModel member)
         {
-            return null;
+            if (ModelState.IsValid)
+            {
+                if (!_memberRepository.GetAllMembers().Exists(m => m.Email == member.Email))
+                {
+                    _memberRepository.AddMember(new Member()
+                    {
+                        Email = member.Email,
+                        Password = member.Password,
+                        IsAdmin = false,
+                        IsEnabled = true,
+                        UserPhoto = 1
+                    });
+
+                    if (_securityManager.Login(member.Email, member.Password))
+                    {
+                        return RedirectToAction("Index", "Articles");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User with this email already exists");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Registration data is invalid");
+            }
+            
+            return View("Index");
         }
 
         public ActionResult ShowNavbar()
