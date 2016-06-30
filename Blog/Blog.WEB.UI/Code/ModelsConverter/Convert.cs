@@ -7,7 +7,7 @@ namespace Blog.WEB.UI.Code.ModelsConverter
 {
     public static class Convert
     {
-        public static List<Article> ConvertArtilceEntity(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository)
+        public static List<Article> ConvertArtilceEntity(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository, ICommentRepository commentRepository)
         {
             var convertedArticles = (from article in articleRepository.GetAllArticles()
                                              select new Article()
@@ -18,7 +18,8 @@ namespace Blog.WEB.UI.Code.ModelsConverter
                                                  Category = categoryRepository.GetCategoryById(article.CategoryId).Name,
                                                  Content = article.Content,
                                                  PublishDate = article.PublishDate,
-                                                 MemberId = article.MemberId
+                                                 MemberId = article.MemberId,
+                                                 NumberOfComments = commentRepository.GetAllCommentsByArticleId(article.ArticleId).Count
                                              }).ToList();
 
             return convertedArticles;

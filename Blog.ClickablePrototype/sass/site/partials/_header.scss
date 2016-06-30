@@ -1,0 +1,122 @@
+.site-nav {
+    background-color: white;
+    margin: 0 auto;
+    border-bottom: 2px solid lightgray;
+    display:table;
+    span {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    span:first-child {
+        padding-left:5%;
+        font-size:$defaultFontSize+0.6;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-right: 20px;
+        float: right;
+        display: inline-table;
+        li {
+            float: left;
+            padding: $navListItemVerticalPadding 20px;
+            position: relative;
+            a {
+                margin: 0% 10%;
+                font-size: $defaultFontSize;
+                line-height: $navListAItemLineHeight;
+                font-weight: bold;
+                color: #000;
+            }
+            ul {
+                border-top: 3px solid #F69087;
+                position: absolute;
+                top: $navHeight;
+                padding: 0;
+                background-color: #fff;
+                display: none;
+                width: 100%;
+                border: 1px solid lightgray;
+                li {
+                    margin: 0;
+                    float: none;
+                    overflow: hidden;
+                    padding: $navListItemVerticalPadding / 4 15%;
+                }
+                li:hover {
+                    background-color: #F8F8F8;
+                }
+            }
+        }
+        li ul:focus,
+        li.menu-down:hover ul {
+            display: block;
+        }
+    }
+}
+
+#show-menu-btn {
+    display: none;
+}
+
+.higgerNarrower {
+    @extend .site-nav;
+    width: 90%;
+}
+
+.shorterWidder {
+    @extend .site-nav;
+    width: 100%;
+    ul li {
+        padding: $navListItemSmallVerticalPadding 20px;
+        ul {
+            top: countHeaderMinHeight($navListAItemLineHeight, $defaultFontSize, $navListItemSmallVerticalPadding);
+            li {
+                padding: $navListItemSmallVerticalPadding / 4 15%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    #show-menu-btn {
+        display: table-cell;
+        width:15%;
+        float:left;
+    }
+    #brand{
+        width:85%;
+        float:left;
+    }
+
+    .site-nav {
+        padding:$navListItemSmallVerticalPadding;
+    }
+    .site-nav {
+        ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            float: none;
+            display: none;
+            li {
+                width: 100%;
+                display: block;
+                padding: $navListItemSmallVerticalPadding / 8 5%;
+                a{
+                    margin:0;
+                }
+                ul{
+                    top:0;
+                    float:left;
+                    position:relative;
+                    
+                    li{
+                        border-top:1px solid lighgray;
+                        
+                    }        
+                }
+            }
+        }
+    }
+}

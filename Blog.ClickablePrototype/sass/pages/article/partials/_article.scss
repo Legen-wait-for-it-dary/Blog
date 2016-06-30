@@ -1,0 +1,42 @@
+$articleTitleFontFamily: Georgia, Times, 'Times New Roman', serif;
+$articleContentFontFamily:Verdana, Geneva, sans-serif;
+$articleTitleFontSize: 2.8rem;
+
+article {
+    background-color: white;
+    margin-bottom: 20px;
+    
+    .title {
+        font-size: $articleTitleFontSize;
+        padding: 2.5%;
+        font-family: $articleTitleFontFamily;
+    }
+
+    .meta-data {
+        padding: 0 2.5% 2.5% 2.5%;
+    }
+
+    .post-date,
+    .category,
+    .number-comments {
+        float: left;
+        margin-right: 10px;
+    }
+
+    .post-date span,
+    .category span,
+    .number-comments span{
+        margin-right: 10px;
+    }
+
+    .img img {
+        width: 100%;
+        max-height:400px;
+    }
+
+    .more-content{
+        font-family: $articleContentFontFamily;
+        padding: 1.5% 2.5%;
+        line-height: 1.5;
+    }
+}

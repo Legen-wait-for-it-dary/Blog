@@ -11,5 +11,6 @@ namespace Blog.WEB.UI.Models
         public int MemberId { get; set; }
         public string Content { get; set; }
         public DateTime? PublishDate { get; set; }
+        public int NumberOfComments { get; set; }
     }
 }

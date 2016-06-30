@@ -88,7 +88,7 @@ namespace Blog.WEB.UI.Controllers
         [ChildActionOnly]
         public List<Models.Article> GetAllArticles()
         {
-            return Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository);
+            return Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository, _commentRepository);
         }
 
         [ChildActionOnly]

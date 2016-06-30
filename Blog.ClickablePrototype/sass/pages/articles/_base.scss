@@ -1,0 +1,12 @@
+@import "..//..//site//modules//_functions";
+@import "..//..//site//modules//_global_variables";
+
+
+@import "..//article//partials//_article";
+@import "partials/_pager";
+@import "partials/_read-more-btn";
+
+article {
+    overflow:hidden;
+}
+

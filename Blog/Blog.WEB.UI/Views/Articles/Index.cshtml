@@ -1,8 +1,6 @@
 ﻿@{
     ViewBag.Title = "Articles";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
-    @*string email = ViewBag.email;*@
 }
 
 @section Style{
@@ -12,7 +10,7 @@
 }
 
 @section Body{
-    @Html.Action("ShowNavbar","Home")
+    @Html.Partial("_Navbar")
     <section class="content">
         <div class="row">
             <section class="col-md-9">

@@ -1,0 +1,59 @@
+.comments {
+    padding: 1.5%;
+
+    .num-comments {
+    float: left;
+    width: 100%;
+}
+
+.user-name {
+    color: #F69087;
+    font-weight: bold;
+    margin-right:10px;
+}
+
+.publish-date {
+    color: #70a1bd;
+    font-weight: bold;
+}
+
+li {
+    padding: 5%;
+}
+
+
+}
+
+
+.media-object{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
+
+
+    .media-body p {
+        font-family: $articleContentFontFamily;
+        padding: 1.5% 2.5%;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        border: 1px solid gray;
+    border-radius: 3px;
+    background-color: #F9F9F9;
+    }
+
+
+.reply-link {
+    display: block;
+    padding: 5px 0;
+}
+
+.add-comment button{
+    margin:10px 0;
+}
+
+.add-comment .form-control {
+    min-height:100px;
+    padding:5px;
+}

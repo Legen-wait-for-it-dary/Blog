@@ -1,0 +1,270 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+.tags {
+  background-color: white;
+  margin-top: 20px;
+}
+.tags ul {
+  list-style: none;
+  padding: 0;
+}
+.tags li {
+  border-left: 5px solid transparent;
+  line-height: 2;
+  font-weight: bold;
+  color: #666679;
+  text-indent: 20px;
+}
+.tags li:hover {
+  border-left: 5px solid #F69087;
+  background-color: #F8F8F8;
+}
+.tags li {
+  border-top: 1px solid lightgray;
+}
+.tags span {
+  text-indent: 20px;
+  display: block;
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: 2% 0;
+  font-family: "Lato", serif;
+}
+
+.popular-posts {
+  background-color: white;
+  overflow: hidden;
+}
+.popular-posts .item {
+  width: 100%;
+  float: left;
+  padding: 5%;
+  border-left: 5px solid transparent;
+}
+.popular-posts .item:hover {
+  border-left: 5px solid #F69087;
+}
+.popular-posts .title {
+  float: left;
+  line-height: 1;
+}
+.popular-posts span {
+  text-indent: 20px;
+  display: block;
+  font-size: 2rem;
+  line-height: 1.5;
+  padding: 2% 0;
+  font-family: "Lato", serif;
+}
+
+.site-nav, .higgerNarrower, .shorterWidder {
+  background-color: white;
+  margin: 0 auto;
+  border-bottom: 2px solid lightgray;
+  display: table;
+}
+.site-nav span, .higgerNarrower span, .shorterWidder span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.site-nav span:first-child, .higgerNarrower span:first-child, .shorterWidder span:first-child {
+  padding-left: 5%;
+  font-size: 2rem;
+}
+.site-nav ul, .higgerNarrower ul, .shorterWidder ul {
+  list-style: none;
+  padding: 0;
+  margin-right: 20px;
+  float: right;
+  display: inline-table;
+}
+.site-nav ul li, .higgerNarrower ul li, .shorterWidder ul li {
+  float: left;
+  padding: 30px 20px;
+  position: relative;
+}
+.site-nav ul li a, .higgerNarrower ul li a, .shorterWidder ul li a {
+  margin: 0% 10%;
+  font-size: 1.4rem;
+  line-height: 2;
+  font-weight: bold;
+  color: #000;
+}
+.site-nav ul li ul, .higgerNarrower ul li ul, .shorterWidder ul li ul {
+  border-top: 3px solid #F69087;
+  position: absolute;
+  top: 88px;
+  padding: 0;
+  background-color: #fff;
+  display: none;
+  width: 100%;
+  border: 1px solid lightgray;
+}
+.site-nav ul li ul li, .higgerNarrower ul li ul li, .shorterWidder ul li ul li {
+  margin: 0;
+  float: none;
+  overflow: hidden;
+  padding: 7.5px 15%;
+}
+.site-nav ul li ul li:hover, .higgerNarrower ul li ul li:hover, .shorterWidder ul li ul li:hover {
+  background-color: #F8F8F8;
+}
+.site-nav ul li ul:focus, .higgerNarrower ul li ul:focus, .shorterWidder ul li ul:focus,
+.site-nav ul li.menu-down:hover ul,
+.higgerNarrower ul li.menu-down:hover ul,
+.shorterWidder ul li.menu-down:hover ul {
+  display: block;
+}
+
+#show-menu-btn {
+  display: none;
+}
+
+.higgerNarrower {
+  width: 90%;
+}
+
+.shorterWidder {
+  width: 100%;
+}
+.shorterWidder ul li {
+  padding: 15px 20px;
+}
+.shorterWidder ul li ul {
+  top: 58px;
+}
+.shorterWidder ul li ul li {
+  padding: 3.75px 15%;
+}
+
+@media only screen and (max-width: 750px) {
+  #show-menu-btn {
+    display: table-cell;
+    width: 15%;
+    float: left;
+  }
+
+  #brand {
+    width: 85%;
+    float: left;
+  }
+
+  .site-nav, .higgerNarrower, .shorterWidder {
+    padding: 15px;
+  }
+
+  .site-nav ul, .higgerNarrower ul, .shorterWidder ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    float: none;
+    display: none;
+  }
+  .site-nav ul li, .higgerNarrower ul li, .shorterWidder ul li {
+    width: 100%;
+    display: block;
+    padding: 1.875px 5%;
+  }
+  .site-nav ul li a, .higgerNarrower ul li a, .shorterWidder ul li a {
+    margin: 0;
+  }
+  .site-nav ul li ul, .higgerNarrower ul li ul, .shorterWidder ul li ul {
+    top: 0;
+    float: left;
+    position: relative;
+  }
+  .site-nav ul li ul li, .higgerNarrower ul li ul li, .shorterWidder ul li ul li {
+    border-top: 1px solid lighgray;
+  }
+}
+html, body {
+  height: 100%;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #DAE3E7;
+  font-size: 1.4rem;
+}
+
+a:hover, a:visited {
+  text-decoration: none;
+}
+
+.content {
+  padding: 0 5%;
+  margin-top: 108px;
+}
+
+@media only screen and (max-width: 750px) {
+  .content {
+    padding: 0 5%;
+    margin-top: 70px;
+  }
+}
+/*
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 1rem;//14px
+    }
+
+    html { font-size: 55%; } 
+}
+*/

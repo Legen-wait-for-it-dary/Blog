@@ -16,7 +16,7 @@
                     <i class="fa fa-tags"></i>@item.Category
                 </div>
                 <div class="article-number-comments">
-                    <i class="fa fa-comments"></i>19 Comments
+                    <i class="fa fa-comments"></i>@item.NumberOfComments Comments
                 </div>
             </div>
             <div class="article-img">
@@ -32,7 +32,6 @@
                 @Html.Raw(@item.Content)
             </div>
         </div>
-       @* @Html.ActionLink("Read more","Article","Article",new {mediaFileId = @item.ArticleID},new { @class="read-more-btn"})*@
-        @Html.ActionLink("Read more","Index","Article",new {id = @item.ArticleId},new { @class="read-more-btn"})
+       @Html.ActionLink("Read more","Index","Article",new {id = @item.ArticleId},new { @class="read-more-btn"})
     </article>
 }

@@ -49,6 +49,10 @@
 .flag {
     background-color: #70a1bd;
     margin-left: -20px;
+    -moz-min-width: 200px;
+    -ms-min-width: 200px;
+    -o-min-width: 200px;
+    -webkit-min-width: 200px;
     min-width: 200px;
     height: 2.8rem;
     position: relative;
@@ -61,7 +65,7 @@
     text-indent:30px;
 }
 
-    .flag span {
+.flag span {
         display: table-cell;
         vertical-align: middle;
     }

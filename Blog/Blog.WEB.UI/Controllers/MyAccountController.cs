@@ -21,14 +21,16 @@ namespace Blog.WEB.UI.Controllers
         private readonly ISecurityManager _securityManager;
         private readonly IMemberRepository _memberRepository;
         private readonly IMediaFileRepository _mediaFileRepository;
+        private readonly ICommentRepository _commentRepository;
 
-        public MyAccountController(IMemberRepository memberRepository, IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository, ISecurityManager securityManager)
+        public MyAccountController(IMemberRepository memberRepository, IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMediaFileRepository mediaFileRepository, ICommentRepository commentRepository, ISecurityManager securityManager)
         {
             _memberRepository = memberRepository;
             _articleRepository = articleRepository;
             _categoryRepository = categoryRepository;
             _securityManager = securityManager;
             _mediaFileRepository = mediaFileRepository;
+            _commentRepository = commentRepository;
         }
 
 
@@ -53,8 +55,7 @@ namespace Blog.WEB.UI.Controllers
         [HttpGet]
         public ActionResult GetArticleById(int articleId)
         {
-            Article article = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
-                _mediaFileRepository)
+            Article article = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository, _commentRepository)
                 .First(
                     art => art.ArticleId == articleId
                         );
@@ -66,7 +67,7 @@ namespace Blog.WEB.UI.Controllers
         public ActionResult GetMyPublishedPosts()
         {
             List<Article> articleList = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
-                _mediaFileRepository)
+                _mediaFileRepository, _commentRepository)
                 .Where(
                     art =>
                         art.PublishDate != null &&
@@ -89,7 +90,7 @@ namespace Blog.WEB.UI.Controllers
         public ActionResult GetMyRoughCopies()
         {
             List<Article> articleList = Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
-                _mediaFileRepository)
+                _mediaFileRepository, _commentRepository)
                 .Where(
                     art =>
                         art.PublishDate == null &&

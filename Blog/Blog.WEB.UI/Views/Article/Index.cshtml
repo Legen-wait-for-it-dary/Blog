@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/Pages/articles.css")"/>
 }
 
-@section Body{
-    
-   @Html.Action("ShowNavbar","Home")
+@section Body{ 
+   @Html.Partial("_Navbar")
     <section class="content">
         <div class="row">
             <section class="col-md-9">

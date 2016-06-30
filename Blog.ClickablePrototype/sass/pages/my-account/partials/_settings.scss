@@ -1,0 +1,11 @@
+#sub-settings {
+    margin-top:10px;
+}
+
+#settings:hover #sub-settings{
+    display:block;
+}
+
+.selected {
+    background-color:lightgray;
+}

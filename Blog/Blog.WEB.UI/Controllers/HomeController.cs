@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Blog.DAL;
 using Blog.Entities;
 using Blog.WEB.UI.Code.Security;
@@ -67,14 +66,7 @@ namespace Blog.WEB.UI.Controllers
             {
                 ModelState.AddModelError("", "Registration data is invalid");
             }
-            
             return View("Index");
-        }
-
-        public ActionResult ShowNavbar()
-        {
-            ViewBag.memberEmail = _securityManager.CurrentUser.Identity.Name;
-            return PartialView("_Navbar");
         }
     }
 }

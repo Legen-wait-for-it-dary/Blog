@@ -1,0 +1,49 @@
+@import "modules/_functions";
+@import "modules/_global_variables";
+
+
+@import "compass/reset";
+@import "partials/_category";
+@import "partials/_popular_posts";
+@import "partials/_header";
+
+html, body {
+    height: 100%;
+}
+
+html { font-size: 62.5%; } 
+
+body {
+    background-color: #DAE3E7;
+    font-size: $defaultFontSize;
+}
+
+a:hover, a:visited{
+    text-decoration: none;
+}
+
+.content {
+    padding: 0 5%;
+    margin-top: $navHeight +20px;
+}
+
+@media only screen and (max-width: 750px) {
+    .content {
+        padding: 0 5%;
+        margin-top: countHeaderMinHeight($navListAItemLineHeight, $defaultFontSize+0.6, $navListItemSmallVerticalPadding);
+    }
+}
+
+
+@media only screen and (min-width: 992px) {
+     
+}
+/*
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 1rem;//14px
+    }
+
+    html { font-size: 55%; } 
+}
+*/

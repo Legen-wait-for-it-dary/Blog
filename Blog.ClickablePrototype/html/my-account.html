@@ -17,42 +17,29 @@
     <script src="../js/libs/tinymce/tinymce.min.js"></script>
     <!--/tinymce-->
     <!--styles-->
-    <link rel="stylesheet" href="../css/common/common.css" />
+    <link rel="stylesheet" href="../css/site/site.css" />
     <link rel="stylesheet" href="../css/pages/my-account.css" />
     <!--/styles-->
     <!--scripts-->
-    <script src="../js/common/common.js"></script>
     <script src="../js/pages/my-account.js"></script>
     <!--/scripts-->
 </head>
 
 <body>
     <div class="container-fluid">
-        <nav class="row navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">[ABS]</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="articles.html">MY POSTS</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">MY ACCOUNT</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">LOG OUT</a></li>
-                            </ul>
-                        </li>
+        <nav class="row site-nav higgerNarrower navbar-fixed-top">
+            <span id="brand">[ABS] Artem's blog system</span>
+            <span id="show-menu-btn" class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+            <ul>
+                <li><a href="articles.html">POSTS</a></li>
+                <!--li><a href="index.html">SIGN IN/SIGN UP</a></li-->
+                <li class="menu-down"><a class="dropdown-toggle" href="#">ONYSHCHENKO￬<!--span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span--></a>
+                    <ul>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Log out</a></li>
                     </ul>
-                </div>
-            </div>
+                </li>
+            </ul>
         </nav>
         <section class="content">
             <div class="row">
@@ -79,7 +66,6 @@
                 </aside>
                 <section class="col-md-9 my-account">
                     <div class="add-new-post">
-                        <h1>Add new article</h1>
                         <div class="panel panel-default title-panel">
                             <div class="panel-heading">Title</div>
                             <div class="panel-body">
@@ -120,7 +106,7 @@
                         </div>
                     </div>
                     <div class="my-posts">
-                        <!--div class="input-group">
+                        <div class="input-group">
                             <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
                             <div class="input-group-btn">
                                 <div class="btn-group">
@@ -130,7 +116,7 @@
                                     <button art-id="3" class="btn btn-default delete-btn">Delete</button>
                                 </div>
                             </div>
-                        </div-->
+                        </div>
                     </div>
                     <div class="rough-copies">
                         <div class="input-group">

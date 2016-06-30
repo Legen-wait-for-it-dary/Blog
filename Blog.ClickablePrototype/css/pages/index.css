@@ -1,0 +1,21 @@
+#sign-up {
+  display: none;
+}
+
+form {
+  margin: 20px auto;
+  max-width: 250px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: white;
+}
+
+label {
+  padding: 5px 0;
+}
+
+.alert-danger {
+  padding: 2%;
+  display: none;
+}

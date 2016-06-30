@@ -1,0 +1,32 @@
+.tags {
+    background-color:white;
+    margin-top:20px;
+
+    ul{
+        list-style:none;
+        padding:0;
+    }
+
+    li {
+        border-left: $asideListItemBorderLeft solid transparent;
+        line-height: 2;
+        font-weight: bold;
+        color:#666679;
+        text-indent: $asideBlockHeadlineTextIndent;
+    }
+    li:hover {
+        border-left: $asideListItemBorderLeft solid #F69087;
+        background-color:#F8F8F8;
+    }
+    li {
+        border-top: 1px solid lightgray;
+    }
+    span {
+        text-indent: $asideBlockHeadlineTextIndent;
+        display: block;
+        font-size: $asideBlockHeadlineFontSize;
+        line-height: $asideBlockHeadlineLineHeight;
+        padding: 2% 0;
+        font-family: $asideBlockHeadlineFontFamily;
+    }
+}

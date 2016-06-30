@@ -1,0 +1,12 @@
+$defaultFontSize: 1.4rem;//14px
+$navListAItemLineHeight:2;
+$navListItemVerticalPadding:30px;
+$navListItemSmallVerticalPadding:15px;
+$navHeight:$navListAItemLineHeight*remtopx($defaultFontSize)+$navListItemVerticalPadding*2; 
+
+$asideBlockHeadlineTextIndent:20px;
+$asideBlockHeadlineFontSize:2rem;
+$asideBlockHeadlineLineHeight: 1.5;
+$asideBlockHeadlineFontFamily: "Lato",serif;
+$asideListItemBorderLeft:5px;
+

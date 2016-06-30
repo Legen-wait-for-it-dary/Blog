@@ -1,0 +1,15 @@
+@import "partials/_change_credentials";
+@import "partials/_edit_article";
+@import "partials/_settings";
+
+.add-new-post,
+.rough-copies,
+.change-email,
+.change-password,
+.change-user-photo,
+#sub-settings {
+    display:none;
+}
+
+
+

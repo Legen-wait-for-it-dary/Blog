@@ -1,0 +1,26 @@
+.add-new-post .panel{
+  float: left;
+}
+
+.categories-panel, .title-panel{
+  width: 33.3%;
+}
+
+.content-panel{
+  width: 100%;
+}
+
+.add-post-big-image img{
+    width:100%;
+    display:none;
+    max-height:300px;
+}
+
+.add-new-post-mng-btns {
+    margin:10px 0;
+}
+
+.title-panel .alert, .contet-panel .alert {
+    padding: 2px;
+    margin: 2px 0;
+}

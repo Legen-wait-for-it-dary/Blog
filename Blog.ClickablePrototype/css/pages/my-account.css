@@ -1,80 +1,51 @@
-﻿/*aside*/
-.selected {
-    background-color:lightgray;
+.change-email input, .change-password input {
+  width: 50%;
 }
-/*/aside*/
+
+.add-new-post .panel {
+  float: left;
+}
+
+.categories-panel, .title-panel {
+  width: 33.3%;
+}
+
+.content-panel {
+  width: 100%;
+}
+
+.add-post-big-image img {
+  width: 100%;
+  display: none;
+  max-height: 300px;
+}
+
+.add-new-post-mng-btns {
+  margin: 10px 0;
+}
+
+.title-panel .alert, .contet-panel .alert {
+  padding: 2px;
+  margin: 2px 0;
+}
+
+#sub-settings {
+  margin-top: 10px;
+}
+
+#settings:hover #sub-settings {
+  display: block;
+}
+
+.selected {
+  background-color: lightgray;
+}
+
 .add-new-post,
 .rough-copies,
-.my-posts,
 .change-email,
 .change-password,
 .change-user-photo,
 #sub-settings {
-    display:none;
-}
-/*add-new-post*/
-.add-new-post .panel{
-  float: left;
-}
-
-.categories-panel, .title-panel{
-  width: 33.3%;
-}
-
-.content-panel{
-  width: 100%;
-}
-
-.add-post-big-image img{
-    width:100%;
-    display:none;
-    max-height:300px;
-}
-
-textarea{
-    width:100%;
-    display:block;
-    min-height: 300px;
-    
-}
-
-.add-new-post-mng-btns {
-    margin:10px 0;
-}
-/*/add-new-post*/
-/*settings*/
-#sub-settings {
-    margin-top:10px;
-}
-
-#settings:hover #sub-settings{
-    display:block;
-}
-/*/settings*/
-
- .custom-combobox {
-    position: relative;
-    display: inline-block;
-  }
-  .custom-combobox-toggle {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin-left: -1px;
-    padding: 0;
-  }
-  .custom-combobox-input {
-    margin: 0;
-    padding: 5px 10px;
-  }
-
-/*categories*/
-.categories form{
-  max-width: 50%;
-}
-/*/categories*/
-
-.title-panel .alert, .contet-panel .alert {
-    padding: 2px;
-    margin: 2px 0;
+  display: none;
 }
