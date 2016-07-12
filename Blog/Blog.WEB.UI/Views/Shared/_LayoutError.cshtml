@@ -1,19 +1,18 @@
-﻿@using System.Web.Optimization
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width"/>
-    @Scripts.Render("~/bundles/commonScripts")
-    @Styles.Render("~/bundles/commonStyles")
-    @RenderSection("Style", false)
-
+    <style>
+        div {
+            margin: 0 auto;    
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
         @RenderSection("Body", false)
     </div>
-    @RenderSection("Scripts", false)
 </body>
 </html>

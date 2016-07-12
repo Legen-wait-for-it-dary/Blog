@@ -38,16 +38,15 @@ namespace Blog.WEB.UI.Code
 
         public static string GetImage(string fileName)
         {
+            if (string.IsNullOrEmpty(fileName))
+                return null;
             string serverRootDirectory = HostingEnvironment.MapPath(@"/Images/");
             string path = serverRootDirectory + fileName;
             if (serverRootDirectory != null)
             {
                 return @"data:image/gif;base64," + Convert.ToBase64String(File.ReadAllBytes(path));
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

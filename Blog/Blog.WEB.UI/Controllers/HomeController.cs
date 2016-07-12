@@ -37,6 +37,15 @@ namespace Blog.WEB.UI.Controllers
             return View("Index");
         }
 
+        public ActionResult Logout()
+        {
+            if (_securityManager.IsAuthenticated)
+            {
+                _securityManager.Logout();
+            }
+            return View("Index");
+        }
+
         public ActionResult SignUp(Models.RegisterMemberModel member)
         {
             if (ModelState.IsValid)

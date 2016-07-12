@@ -10,8 +10,6 @@
 				that.signInInputChange($(this));
 			}
 		);
-
-		this.initFormValidation();
 	};
 	
 	this.signUpLinkClick = function () {

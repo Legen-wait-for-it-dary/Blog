@@ -67,6 +67,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -152,6 +155,7 @@
     <Compile Include="Code\Security\ISecurityManager.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +171,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="App_Data\error.log" />
     <Content Include="Content\Common\common.css" />
     <Content Include="Content\Libs\bootstrap-3.3.6\bootstrap.min.css" />
     <Content Include="Content\Libs\jquery-ui-1.11.4\jquery-ui.min.css" />
@@ -174,16 +179,18 @@
     <Content Include="Content\Pages\articles.css" />
     <Content Include="Content\Pages\index.css" />
     <Content Include="Content\Pages\my-account.css" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\img.png" />
     <Content Include="Scripts\Libs\bootstrap-3.3.6\bootstrap.min.js" />
     <Content Include="Scripts\Libs\jquery\jquery.min.js" />
-    <Content Include="Scripts\Libs\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\Libs\jquery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\Libs\jquery\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\Libs\jquery\jquery.validate.js" />
     <Content Include="Scripts\Libs\jquery\jquery.validate.min.js" />
-    <Content Include="Scripts\Libs\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Libs\jquery\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Libs\tinymce\jquery.tinymce.min.js" />
     <Content Include="Scripts\Libs\tinymce\license.txt" />
@@ -276,10 +283,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\_SignIn.cshtml" />
     <Content Include="Views\Home\_SignUp.cshtml" />
+    <Content Include="Views\Shared\_PopularPosts.cshtml" />
+    <Content Include="Views\Shared\_SearchPost.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Shared\_LayoutError.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -308,7 +318,6 @@
     <Content Include="Scripts\Libs\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\MyAccount\Index.cshtml" />
     <Content Include="Views\MyAccount\_AddNewArticle.cshtml" />
-    <Content Include="Views\Shared\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.DAL\Blog.DAL.csproj">

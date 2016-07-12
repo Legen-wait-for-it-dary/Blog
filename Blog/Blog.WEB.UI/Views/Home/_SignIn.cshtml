@@ -1,6 +1,6 @@
 ﻿@model Blog.WEB.UI.Models.LoginMemberModel
 
-@using (Html.BeginForm("SignIn", "Home", FormMethod.Post, new { @class = "sign-in" }))
+@using (Html.BeginForm("SignIn", "Home", FormMethod.Post, new { @id = "sign-in" }))
             {
 @Html.ValidationSummary()
                 <div class="form-group">

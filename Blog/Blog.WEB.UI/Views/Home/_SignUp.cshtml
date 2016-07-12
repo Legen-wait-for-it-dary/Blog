@@ -1,6 +1,6 @@
 ﻿@model Blog.WEB.UI.Models.RegisterMemberModel 
 
-@using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { @class = "sign-up" }))
+@using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { @id = "sign-up" }))
             {
 @Html.ValidationSummary()
                 <div class="form-group">
@@ -13,10 +13,13 @@
                     @Html.EditorFor(m => m.Password, new { htmlAttributes = new { id = "sign-up-password", @placeholder = "Password", @class = "form-control", type = "password" } })
                     @Html.ValidationMessageFor(m => m.Password)                
 </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmedPassword)
+                    @Html.EditorFor(m => m.ConfirmedPassword, new {htmlAttributes = new {id = "sign-up-rep-password", @placeholder = "Repeat password", @class = "form-control", type = "password"}})
+                    @Html.ValidationMessageFor(m => m.ConfirmedPassword)
+                </div>
 <div class="form-group">
-    @Html.LabelFor(m => m.ConfirmedPassword)
-                    @Html.EditorFor(m => m.ConfirmedPassword, new { htmlAttributes = new { id = "sign-up-rep-password", @placeholder = "Repeat password", @class = "form-control", type = "password" } })
-                    @Html.ValidationMessageFor(m => m.ConfirmedPassword)                
-</div>
+                        <p class="help-block"><a href="#" id="sign-in-link">Back to sign in</a></p>
+                    </div>
 <button type="submit" class="btn btn-default" id="submit-sign-up">Sign up</button>
 }

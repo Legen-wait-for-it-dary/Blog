@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web.Mvc;
 using Blog.DAL;
@@ -28,31 +29,45 @@ namespace Blog.WEB.UI.Controllers
             _mediaFileRepository = mediaFileRepository;
         }
 
-        //
         // GET: /Article/
-
-        [HandleError(ExceptionType = typeof(InvalidOperationException), View = "PageNotFound")]
         public ActionResult Index(int id)
         {
             if (_securityManager.IsAuthenticated)
             {
-                ViewBag.email = _securityManager.CurrentUser.Identity.Name;
-                ViewBag.article = GetAllArticles().First(art => art.ArticleId == id);
+                ViewBag.memberEmail = _securityManager.CurrentUser.Identity.Name;
+                Member member = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name);
+                ViewBag.memberAvatar = _mediaFileRepository.GetMediaFileById(member.UserPhoto).FileName;
+            }
 
-                    Member member = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name);
-                    ViewBag.memberAvatar = _mediaFileRepository.GetMediaFileById(member.UserPhoto).FileName;
-                    ViewBag.numOfComments = _commentRepository.GetAllComments().Where(com => com.ArticleId == id).ToList().Count;
-                    return View();
-            }
-            else
+            if (_articleRepository.GetAllArticles().Exists(a => a.ArticleId == id))
             {
-                return RedirectToAction("Index", "Home");    
+
+                ViewBag.categories = Code.ModelsConverter.Convert.ConvertCategoryEntity(_categoryRepository);
+                ViewBag.numOfComments =
+                    _commentRepository.GetAllComments().Where(com => com.ArticleId == id).ToList().Count;
+                ViewBag.article =
+                    Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository,
+                        _mediaFileRepository, _commentRepository).First(art => art.ArticleId == id);
+                return View();
             }
+            return RedirectToAction("PageNotFound", "Error");
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddComment(string content, string articleId)
         {
+            int iArticleId;
+            if (string.IsNullOrEmpty(content))
+            {
+                return Json(new { error = "Can't post empty comment" });
+            }
+
+            if (string.IsNullOrEmpty(articleId) || !int.TryParse(articleId, out iArticleId))
+            {
+                return Json(new { error = "An error occured while adding comment" });
+            }
+
             _commentRepository.AddComment(new Comment()
             {
                 Content = content,
@@ -63,42 +78,17 @@ namespace Blog.WEB.UI.Controllers
 
             return Json(new
             {
-                srcOfMemberAvatar = "src",
-                memberEmail = _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).Email,
+                srcOfMemberAvatar = "/Images/" + _mediaFileRepository.GetMediaFileById(_memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).UserPhoto).FileName,
+                memberEmail = _securityManager.CurrentUser.Identity.Name,
                 publishDate = DateTime.Now.ToLongDateString()
             });
-        }
 
-        public ActionResult ShowCategories()
-        {
-            return PartialView("_Categories", GetAllCategories());
         }
 
         public ActionResult ShowComments(int articleId)
         {
-            return PartialView("_Comments", GetAllCommentsByArticleId(articleId));
+            return PartialView("_Comments", Code.ModelsConverter.Convert.ConvertCommentEntity(
+                    _commentRepository.GetAllCommentsByArticleId(articleId), _memberRepository, _mediaFileRepository));
         }
-
-        [ChildActionOnly]
-        public List<Models.Category> GetAllCategories()
-        {
-            return Code.ModelsConverter.Convert.ConvertCategoryEntity(_categoryRepository);
-        }
-
-        [ChildActionOnly]
-        public List<Models.Article> GetAllArticles()
-        {
-            return Code.ModelsConverter.Convert.ConvertArtilceEntity(_articleRepository, _categoryRepository, _mediaFileRepository, _commentRepository);
-        }
-
-        [ChildActionOnly]
-        public List<Models.Comment> GetAllCommentsByArticleId(int articleId)
-        {
-            return
-                Code.ModelsConverter.Convert.ConvertCommentEntity(
-                    _commentRepository.GetAllCommentsByArticleId(articleId), _memberRepository, _mediaFileRepository);
-
-        }
-
     }
 }

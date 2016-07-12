@@ -2,24 +2,22 @@
 
 @foreach (Blog.WEB.UI.Models.Article item in Model)
 {
-    <article class="artilce">
-        <div class="latest-project">
-            <div class="article-title">
+    <article>
+            <div class="title">
                 @item.Title
             </div>
-            <div class="article-meta-data">
-                <div class="article-post-date">
-                    <i class="fa fa-clock-o" aria-hmediaFileIdden="true"></i>@item.PublishDate.Value.ToLongDateString()
-                                                                    
-                </div>
-                <div class="article-tag">
-                    <i class="fa fa-tags"></i>@item.Category
-                </div>
-                <div class="article-number-comments">
-                    <i class="fa fa-comments"></i>@item.NumberOfComments Comments
-                </div>
-            </div>
-            <div class="article-img">
+            <div class="meta-data">
+                        <div class="post-date">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>@item.PublishDate.Value.ToShortDateString()
+                        </div>
+                        <div class="category">
+                            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>@item.Category
+                        </div>
+                        <div class="number-comments">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>@item.NumberOfComments
+                        </div>
+                    </div>
+            <div class="img img-responsive">
                 @{
     if (@item.ArticleCover != "")
     {
@@ -28,10 +26,9 @@
                 }
 
             </div>
-            <div class="article-content">
+            <div class="more-content">
                 @Html.Raw(@item.Content)
             </div>
-        </div>
-       @Html.ActionLink("Read more","Index","Article",new {id = @item.ArticleId},new { @class="read-more-btn"})
+         @Html.ActionLink("Read more","Index","Article",new {id = @item.ArticleId},new { @class="read-more-btn"})
     </article>
 }

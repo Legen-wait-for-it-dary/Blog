@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Configuration;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.DAL;
 using Blog.WEB.UI.Code.Security;
+using NLog;
 
 
 namespace Blog.WEB.UI
@@ -32,6 +34,25 @@ namespace Blog.WEB.UI
             ISecurityManager securityManager = new FormsSecurityManager(userRepository);
 
             securityManager.RefreshPrincipal();
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            Response.Clear();
+            Logger logger = LogManager.GetCurrentClassLogger();
+            logger.Log(LogLevel.Error, ex.ToString());
+
+            string action = "InternalServerError";
+            if (ex is HttpException)
+            {
+                HttpException hex = ex as HttpException;
+                if (hex.GetHttpCode() == 404)
+                {
+                    action = "PageNotFound";
+                }
+            }
+            Response.Redirect(String.Format("~/Error/{0}", action));
         }
     }
 }

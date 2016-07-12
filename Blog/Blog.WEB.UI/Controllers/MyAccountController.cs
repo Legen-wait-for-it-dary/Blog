@@ -14,6 +14,7 @@ using Article = Blog.WEB.UI.Models.Article;
 
 namespace Blog.WEB.UI.Controllers
 {
+    [Authorize]
     public class MyAccountController : Controller
     {
         private readonly IArticleRepository _articleRepository;
@@ -33,22 +34,18 @@ namespace Blog.WEB.UI.Controllers
             _commentRepository = commentRepository;
         }
 
-
-        //
         // GET: /MyAccount/
-
         public ActionResult Index()
         {
             if (_securityManager.IsAuthenticated)
             {
-                ViewBag.email = _securityManager.CurrentUser.Identity.Name;
+                ViewBag.memberEmail = _securityManager.CurrentUser.Identity.Name;
                 ViewBag.numberOfPublishedPosts = _articleRepository.GetAllArticles().Count(art => art.PublishDate != null && art.MemberId == _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId);
                 ViewBag.numberOfRoughCopies = _articleRepository.GetAllArticles().Count(art => art.PublishDate == null && art.MemberId == _memberRepository.GetMember(_securityManager.CurrentUser.Identity.Name).MemberId);
 
                 return View();
             }
             return RedirectToAction("Index", "Home");
-
         }
 
         //Get: /MyAccount/GetArticleById

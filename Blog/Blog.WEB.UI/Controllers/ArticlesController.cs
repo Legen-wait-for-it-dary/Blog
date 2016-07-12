@@ -25,36 +25,20 @@ namespace Blog.WEB.UI.Controllers
             _commentRepository = commentRepository;
         }
 
-        //
         // GET: /Articles/
-
         public ActionResult Index()
         {
-
             if (_securityManager.IsAuthenticated)
             {
                 ViewBag.memberEmail = _securityManager.CurrentUser.Identity.Name;
-                return View();
             }
-            return RedirectToAction("Index", "Home");
-        }
-
-
-        public ActionResult ShowCategories()
-        {
-            return PartialView("_Categories", GetAllCategories());
+            ViewBag.categories = Convert.ConvertCategoryEntity(_categoryRepository);
+            return View();
         }
 
         public ActionResult ShowArticles()
         {
             return PartialView("_Articles", GetAllArticles().Where(article => article.PublishDate != null));
-        }
-
-
-        [ChildActionOnly]
-        public List<Models.Category> GetAllCategories()
-        {
-            return Convert.ConvertCategoryEntity(_categoryRepository);
         }
 
         [ChildActionOnly]

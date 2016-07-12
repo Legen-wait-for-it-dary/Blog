@@ -4,6 +4,15 @@ var AccountPage = function () {
     var that = this;
 
     this.initPage = function () {
+        $('#show-menu-btn').on('click', function (event) {
+            if ($('.site-nav > ul').css('display') == 'block') {
+                $('.site-nav > ul').hide();
+            } else {
+                $('.site-nav > ul').show();
+            }
+        });
+        $(window).on('scroll', this.windowScrolled);
+
         $("#add-new-post,#my-posts,#rough-copies,#change-email,#change-password,#change-user-photo")
             .on("click",
                 function () {
@@ -20,6 +29,18 @@ var AccountPage = function () {
         $("#publish-btn").on("click", this.publishBtnClick);
         $("#add-to-rough-copies-btn").on("click", this.addToRoughCopiesBtnClick);
         $(".form-inline").on("submit", function () { return false; });
+
+        that.myPostsClick();
+    };
+
+    this.windowScrolled = function () {
+        if ($(window).scrollTop() > 30) {
+            $('nav.site-nav').removeClass('higgerNarrower');
+            $('nav.site-nav').addClass('shorterWidder');
+        } else {
+            $('nav.site-nav').removeClass('shorterWidder');
+            $('nav.site-nav').addClass('higgerNarrower');
+        }
     };
 
     this.updateArticleClick = function () {
@@ -192,8 +213,9 @@ var AccountPage = function () {
 
     this.publishBtnClick = function () {
         if (that.isArticleValid()) {
-            if ($("#article-cover-img").attr("src") !== "") {
-                that.uploadImageToServer(true,that.uploadArticle);
+            
+            if ($("#article-cover-img").attr("src")) {
+                that.uploadImageToServer(true, that.uploadArticle);
             } else {
                 that.uploadArticle(null,true);
             }
@@ -202,7 +224,7 @@ var AccountPage = function () {
 
     this.addToRoughCopiesBtnClick = function () {
         if (that.isArticleValid()) {
-            if ($("#article-cover-img").attr("src") !== "") {
+            if ($("#article-cover-img").attr("src")) {
                 that.uploadImageToServer(false, that.uploadArticle);
             } else {
                 that.uploadArticle(null,false);
